@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@initView');
+
+Route::group(['middleware' => 'locale'], function () {
+    Route::get('/home/{lang}', 'SwitchLanguage@setLocale')->name('home.lang');
+    Route::get('/profile', 'HomeController@profile')->name('home.profile');
 });
