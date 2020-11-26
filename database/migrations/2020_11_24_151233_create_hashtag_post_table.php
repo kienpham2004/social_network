@@ -14,7 +14,7 @@ class CreateHashtagPostTable extends Migration
     public function up()
     {
         Schema::create('hashtag_post', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('post_id')->unsigned();
             $table->integer('hashtag_id')->unsigned();
             $table->timestamps();
