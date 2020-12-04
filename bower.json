@@ -1,0 +1,24 @@
+{
+  "name": "social_network",
+  "description": "",
+  "main": "",
+  "authors": [
+    "kienpham2004 <phamkien20041998@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/kienpham2004/social_network",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1",
+    "font-awesome": "^5.15.1",
+    "css": "https://fonts.googleapis.com/css?family=Nunito"
+  }
+}

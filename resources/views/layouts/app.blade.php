@@ -18,6 +18,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/css/index.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/font-awesome/css/fontawesome.min.css') }}" rel="stylesheet">
+    @yield('css')
 </head>
 <body>
     <div id="app">
@@ -41,6 +45,12 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home.lang', ['vi']) }}">Tiếng Việt</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home.lang', ['en']) }}">English</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ trans('log_res.login') }}</a>
                             </li>
                             @if (Route::has('register'))
@@ -57,6 +67,12 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('home.lang', ['vi']) }}">Tiếng Việt</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('home.lang', ['en']) }}">English</a>
+                                        </li>
                                         <button class="btn btn-link" type="submit">{{ trans('log_res.logout') }}</button>
                                     </form>
                                 </div>
@@ -71,5 +87,12 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bower_components/jquery/dist/jquery.slim.min.js') }}"></script>
+    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('bower_components/font-awesome/js/fontawesome.min.js') }}"></script>
+    @yield('js')
+
 </body>
 </html>
