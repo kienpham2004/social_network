@@ -11,4 +11,11 @@ return [
     'remenberme' => 'Nhớ tài khoản',
     'forgot_pass' => 'Quên mật khẩu',
     'confirm_pass' => 'Xác nhận mật khẩu',
+    'phone_user_email_login' => 'Nhập số điện thoại, tên đăng nhập hoặc email',
+    'or' => 'Hoặc',
+    'log_with_fb' => 'Đăng nhập với Facebook',
+    'dont_have_an_account' => 'Không có tài khoản?',
+    'get_app' => 'Tải ứng dụng.',
+    'enter_email' => 'Nhập tên email',
+    'enter_username' => 'Nhập tên tài khoản',
 ];
