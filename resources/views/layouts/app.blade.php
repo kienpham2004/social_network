@@ -117,7 +117,7 @@
                                         </a>
                                     </li>
                                     <li class="list-inline-item ml-2 align-middle">
-                                        <a href="#" class="link-menu">
+                                        <a href="{{ route('profile.index') }}" class="link-menu">
                                             <div
                                                 class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center border topbar-profile-photo">
                                                 <img class="img-profile" src="" alt="...">
@@ -151,6 +151,7 @@
         </nav>
         <main class="py-4">
             @yield('content')
+            @yield('profile')
         </main>
     </div>
 </body>
