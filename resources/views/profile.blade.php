@@ -87,7 +87,7 @@
 
     <main>
         <div class="container">
-            <button type="button" data-toggle="modal" data-target="#exampleModalCenter" 
+            <button type="button" data-toggle="modal" data-target="#modal-upload-post" 
                 class="btn btn-status">{{ trans('profile.what_do_you_think,') }} {{ Auth::user()->fullname }}</button>
             @error('caption')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -95,7 +95,7 @@
             @error('imageFile')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="modal-upload-post" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document"> 
                     <div class="modal-content">
                         <div class="modal-header">
@@ -104,21 +104,15 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('profile.post_status') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
-                                <textarea class="form-control" name="caption" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                @error('caption')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                <textarea class="form-control" name="caption" id="upload-comment" rows="5"></textarea>
                                 <br>
                                 <div class="user-image mb-3 text-center">
                                     <div class="imgPreview"></div>
                                 </div> 
-                                <input type="file" name="imageFile[]" class="form-control-file" id="exampleFormControlFile1" multiple>
-                                @error('imageFile')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                <input type="file" name="imageFile[]" class="form-control-file" id="upload-file-image" multiple> 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">{{ trans('profile.close') }}</button>
@@ -152,8 +146,8 @@
                                             <img src="{{ asset('image/' . $item->photo_url) }}" class="gallery-image d-block w-100" alt="">
                                         </div>
                                     @endif
-                                    
-                                    @if ($post->images->count() != config('check_var_on_view.check_0'))
+                                
+                                    @if ($post->images->count() != config('check_var_on_view.check_1'))
                                         <a class="carousel-control-prev" href="#caro{{ $post->id }}" role="button" data-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                             <span class="sr-only"></span>
@@ -171,4 +165,8 @@
             </div>
         </div>
     </main>
+@endsection
+
+@section('js')
+    <script language="JavaScript" type="text/javascript" src="{{ mix('js/profile.js')}}"></script>
 @endsection

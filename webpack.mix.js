@@ -16,3 +16,4 @@ mix.js('resources/js/app.js', 'public/js')
 mix.styles(['resources/css/login.css',], 'public/css/all.css');
 mix.styles(['resources/css/navbar.css',], 'public/css/navbar.css');
 mix.styles(['resources/css/profile.css',], 'public/css/profile.css');
+mix.js(['resources/js/profile.js',], 'public/js');

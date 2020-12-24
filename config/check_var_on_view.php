@@ -1,4 +1,4 @@
 <?php
 return [
-    'check_0' => 0,
+    'check_1' => 1,
 ];

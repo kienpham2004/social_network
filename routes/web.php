@@ -23,6 +23,7 @@ Route::group(['middleware' => 'locale'], function () {
     Route::get('/profile', 'HomeController@profile')->name('home.profile');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/profile/your-profile', 'ProfileController@index')->name('profile.index');
+    Route::post('/profile/post-status', 'ProfileController@postStatus')->name('profile.post_status');
 });
 
 

@@ -33,7 +33,7 @@ img {
 }
 
 .container {
-    max-width: 93.5rem;
+    max-width: 950px !important;
     margin: 0 auto;
     padding: 0 2rem;
 }
