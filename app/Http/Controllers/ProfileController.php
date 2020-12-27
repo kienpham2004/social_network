@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
+use App\Http\Requests\UploadAvatarRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostStatusRequest;
 use App\Models\Image;
@@ -43,5 +45,22 @@ class ProfileController extends Controller
             
             return back();
         } 
+    }
+
+    public function uploadAvatar(UploadAvatarRequest $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if ($request->file('avatarFile')) {
+            $imagePath = $request->file('avatarFile');
+            $imageName = rand() . "." . $imagePath->getClientOriginalExtension();
+            $path = $request->file('avatarFile')->move(public_path() . '/avatar/', $imageName);
+        }
+
+        $user->avatar = $imageName;
+        $user->save();
+
+        return redirect()->back(); 
+
     }
 }

@@ -23,43 +23,7 @@
                     </div>
                 </div>
             <div class="profile">
-                <div class="profile-image">
-                    {{-- avatar --}}
-                    <img src="{{ asset('avatar/'. Auth::user()->avatar) }}" alt="">
-                    <button type="button" class="btn btn-primary btn-changeavt" data-toggle="modal" 
-                        id="edit-avatar" data-target="#exampleModal">
-                        <i class="fas fa-camera"></i>
-                    </button>
-                    {{-- modal --}}
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
-                        aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <form action="" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('patch')
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">{{ trans('profile.upload_avatar') }}</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <input type="file" name="avatarFile" onchange="loadPreview(this);" id="profile_image">
-                                        @error('avatarFile')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <img id="preview_img" src="" class="previewImage"/>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary btn-submit">{{ trans('profile.save_change') }}</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @include('layouts.avatar')
                 <div class="profile-user-settings">
                     <h1 class="profile-user-name">{{ Auth::user()->username }}</h1>
                     <button class="btn profile-edit-btn" id="btn-setting">{{ trans('profile.edit_profile') }}</button>
@@ -146,7 +110,6 @@
                                             <img src="{{ asset('image/' . $item->photo_url) }}" class="gallery-image d-block w-100" alt="">
                                         </div>
                                     @endif
-                                
                                     @if ($post->images->count() != config('check_var_on_view.check_1'))
                                         <a class="carousel-control-prev" href="#caro{{ $post->id }}" role="button" data-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

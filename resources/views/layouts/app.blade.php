@@ -160,4 +160,5 @@
     @jquery
     @toastr_js
     @toastr_render
+@yield('js')
 </html>
