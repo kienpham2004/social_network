@@ -1,0 +1,176 @@
+.link-menu {
+    color: black;
+}
+
+/* .topbar-profile-photo {
+    width: 1.5em; 
+    height: 1.5em; 
+    position: relative;
+} */
+
+.story-profile-photo {
+    width: 56px; 
+    height: 56px; 
+    position: relative; 
+    border-width: 2px !important;
+}
+
+.post-profile-photo {
+    width: 46px; 
+    height: 46px; 
+    position: relative; 
+    border-width: 2px !important;
+}
+
+.sidenav-profile-photo {
+    width: 56px; 
+    height: 56px; 
+    position: relative; 
+}
+
+.comment-box {
+    border-top: 1px solid lightgray;
+}
+
+.input-post {
+    outline: none;
+}
+
+.btn-ig {
+    background-color: transparent;
+    border: 0;
+    color: #007bff;
+    font-weight: 600;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    font-size: 15px !important;
+    outline: none !important;
+}
+
+.btn-ig:hover,
+.btn-ig:focus {
+    color: #007bff !important;
+}
+
+.profile-info {
+    font-size: 14px;
+}
+
+.profile-info-username {
+    display: block;
+    font-weight: 700;
+}
+
+.info{
+    color: black;
+}
+
+.info:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.sugest-profile-photo {
+    width: 46px; 
+    height: 46px;  
+    position: relative;
+}
+
+.sugest-username {
+    font-size: 14px
+}
+
+.suggess{
+    position: fixed !important;
+    top: 98px !important;
+    right: 243px !important;
+    width: 300px !important;
+}
+
+.info_flex{
+    display: flex;
+}
+
+#btn-follow{
+    background-color: #0095f6;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.send-comment{
+    height: 25px !important;
+    background-color: transparent !important;
+    color: blue !important;
+    border: 0px !important;
+    margin-right: 10px !important;
+}
+
+.send-comment:disabled{
+    background-color: transparent;
+    color: black;
+}
+
+.editComment{
+    color: black;
+    font-size: 10px;
+    margin-right: 8px;
+}
+
+.deleteComment{
+    color: black;
+    font-size: 10px;
+}
+
+.card-header{
+    background-color: white;
+}
+
+.col-8{
+    max-width: 59% !important;
+}
+
+.avatar-img{
+    transform: scale(1.5) !important;
+    width: 100% !important; 
+    position: absolute !important; 
+    left: 0 !important;
+}
+
+.icon{
+    font-size: 13px !important;
+    width: 1.6em !important;
+    height: 1.6em !important;
+}
+
+.avatar-img{
+    transform: scale(1.5);
+    width: 100%;
+    position: absolute; 
+    left: 0;
+}
+
+.item-comment {
+    padding-bottom: 15px !important; 
+    padding-top: 5px !important;
+}
+
+.deleteComment{
+    float: right !important;
+}
+
+.editComment{
+    float: right !important;
+}
+
+.formEditComment{
+    display: none !important;
+}
+
+.actionEditPost{
+    float: right !important;
+}
+
+.inputEditComment{
+    width: 100% !important;
+}
