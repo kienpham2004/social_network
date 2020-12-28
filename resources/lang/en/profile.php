@@ -10,4 +10,5 @@ return [
     'save_change' => 'Save Change',
     'upload_avatar' => 'Upload avatar',
     'activity_history' => 'Activity History',
+    'upload_avatart' => 'Upload Avatar',
 ];

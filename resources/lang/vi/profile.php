@@ -10,4 +10,5 @@ return [
     'save_change' => 'Lưu thay đổi',
     'upload_avatar' => 'Tải ảnh lên',
     'activity_history' => 'Lịch sử hoạt động',
+    'upload_avatart' => 'Tải ảnh lên',
 ];
