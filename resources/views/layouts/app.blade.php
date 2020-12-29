@@ -35,7 +35,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('index') }}">
                     <img src="{{ asset(config('img.img_logo_navbar')) }}" alt="">
@@ -121,7 +121,7 @@
                                         <a href="{{ route('profile.index') }}" class="link-menu">
                                             <div
                                                 class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center border topbar-profile-photo">
-                                                <img class="img-profile" src="" alt="...">
+                                                <img class="img-profile" src="{{ asset('avatar/' . Auth::user()->avatar) }}" alt="...">
                                             </div>
                                         </a>
                                     </li>
