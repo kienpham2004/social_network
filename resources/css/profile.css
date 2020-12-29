@@ -569,3 +569,23 @@ Remove or comment-out the code block below to see how the browser will fall-back
     width: 200px !important;
     height: 200px !important;
 }
+
+.follow-action{
+    display: inline !important; 
+    margin-top: 7px !important;
+}
+
+.btn-setting{
+    display: flex !important;
+}
+
+.btn-follow{
+    background-color: #0095f6 !important; 
+    color: white !important;
+}
+
+.btn-unfollow{
+    background-color: white !important;
+    border: 1px solid black !important;
+    color: black !important;
+}

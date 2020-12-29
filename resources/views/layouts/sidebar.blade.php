@@ -1,6 +1,6 @@
 <div class="col-4 suggess">
     <div class="d-flex flex-row align-items-center">
-        <a class="info" href="{{ route('home.profile') }}"><div
+        <a class="info" href="{{ route('profile.index') }}"><div
             class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center border sidenav-profile-photo">
             <img class="avatar-img" src="{{ asset('avatar/' . Auth::user()->avatar) }}" alt="...">
         </div></a>
