@@ -2,16 +2,25 @@
     @foreach ($posts as $post) 
         <div class="d-flex flex-column mt-4 mb-4 post_user">
             <div class="card">
-                <div class="card-header p-3">
-                    <div class="d-flex flex-row align-items-center">
-                        <div class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center border border-danger post-profile-photo mr-3">
-                            <img class="avatar-img" src="{{ asset('avatar/' . $post->user->avatar) }}" alt="...">
+                <a href="
+                    @if ($post->user->id != Auth::user()->id)
+                        {{ route('wall.your_friend', $post->user->username) }}
+                    @else
+                        {{ route('profile.index') }}
+                    @endif
+                    " 
+                    class="info info_flex">
+                        <div class="card-header p-3 header-post">
+                            <div class="d-flex flex-row align-items-center">
+                                <div class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center border border-danger post-profile-photo mr-3">
+                                    <img class="avatar-img" src="{{ asset('avatar/' . $post->user->avatar) }}" alt="...">
+                                </div>
+                                <span class="font-weight-bold info">
+                                    {{ $post->user->username }}
+                                </span>
+                            </div>
                         </div>
-                        <span class="font-weight-bold info">
-                            {{ $post->user->username }}
-                        </span>
-                    </div>
-                </div>
+                </a>
                 <div class="card-body p-0">
                         <div class="embed-responsive">
                             <div id="caro{{ $post->id }}" class="carousel slide" data-ride="carousel">

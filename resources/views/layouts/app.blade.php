@@ -37,7 +37,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
             <div class="container">
-                <a class="navbar-brand" href="{{ route('index') }}">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     <img src="{{ asset(config('img.img_logo_navbar')) }}" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" 

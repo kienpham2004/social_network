@@ -11,4 +11,5 @@ return [
     'upload_avatar' => 'Tải ảnh lên',
     'activity_history' => 'Lịch sử hoạt động',
     'upload_avatart' => 'Tải ảnh lên',
+    'follow' => 'Theo dõi',
 ];
