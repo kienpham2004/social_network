@@ -105,7 +105,7 @@
     color: black;
 }
 
-.editComment{
+.editComment {
     color: black;
     font-size: 10px;
     margin-right: 8px;
@@ -159,7 +159,7 @@
 }
 
 .formEditComment {
-    display: none;
+    display: none !important;
 }
 
 .actionEditPost {
@@ -181,4 +181,13 @@
     padding: 4px; 
     margin-top: 2px;  
     color: white;
+}
+
+.button-unlike {
+    font-size: 16px !important; 
+    color: #ed4956 !important;
+}
+
+.button-like {
+    font-size: 16px !important;
 }

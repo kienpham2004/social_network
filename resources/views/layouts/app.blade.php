@@ -31,6 +31,7 @@
         crossorigin="anonymous">
     <script src="{{ asset('js/search.js') }}"></script>
     <script src="{{ asset('js/follow.js') }}"></script>
+    <script src="{{ asset('js/like_post.js') }}"></script>
     <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/fontawesome.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/all.js') }}"></script>

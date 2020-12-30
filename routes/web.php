@@ -33,4 +33,6 @@ Route::group(['middleware' => 'locale'], function () {
     Route::post('/home/comment/add', 'CommentController@comment')->name('comment.add');
     Route::patch('/comment/edit/{id}', 'CommentController@editComment')->name('comment.edit');
     Route::delete('/comment/delete/{id}', 'CommentController@deleteComment')->name('comment.delete');
+    Route::post('/like/post', 'LikeController@like')->name('like');
+    Route::delete('/unlike/post/{id}', 'LikeController@unlike')->name('unlike');
 });
