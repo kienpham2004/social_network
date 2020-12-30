@@ -8,4 +8,5 @@ return [
     'see_all' => 'Xem tất cả',
     'follow' => 'Theo dõi',
     'save' => 'Lưu',
+    'search' => 'Tìm kiếm',
 ];

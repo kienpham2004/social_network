@@ -449,3 +449,31 @@ img {
 .fb{
     display: flex;
 }
+
+#result{
+    position: absolute;
+    width: 350px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+}
+
+.search-input{
+    width: 350px !important;
+    border-radius: 100px !important;
+    margin-top: 5px;
+}
+
+.show_suggess_user{
+    display:block !important; 
+    position:relative !important;
+    width: auto !important; 
+    border: 0 !important; 
+    border-radius: none !important; 
+    padding: 0 !important; 
+    line-height: 25px !important;
+}
+
+.user_suggess{
+    display: block !important; 
+    padding-left: 10px !important;
+}

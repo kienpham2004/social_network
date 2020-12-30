@@ -29,6 +29,7 @@
     <link href="{{ asset('bower_components/font-awesome/css/all.css') }}" rel="stylesheet" 
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" 
         crossorigin="anonymous">
+    <script src="{{ asset('js/search.js') }}"></script>
     <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/fontawesome.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/all.js') }}"></script>
@@ -69,9 +70,9 @@
                            <div class="menu_app">
                                 <li class="list-inline" id="btn-search">
                                     <div>
-                                        <form  action="" method="get">
-                                            <input class="form-control mr-sm-4" type="text" placeholder="Search" aria-label="Search">
-                                        </form>
+                                        <input class="form-control mr-sm-4 search-input" id="search"  type="text" placeholder="{{ @trans('timeline.search') }}" aria-label="Search">
+                                        <div class="card search-result" id="result"> 
+                                        </div>
                                     </div>
                                 </li>
                                 <div class="li_navbar_icon">

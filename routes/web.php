@@ -27,4 +27,5 @@ Route::group(['middleware' => 'locale'], function () {
     Route::post('/profile/post-status', 'ProfileController@postStatus')->name('profile.post_status');
     Route::patch('/profile/upload-avatar/{id}', 'ProfileController@uploadAvatar')->name('profile.upload_avatar');
     Route::get('/profile/{username}', 'TimeLineController@viewUser')->name('wall.your_friend');
+    Route::post('/search', 'SearchController@search')->name('search');
 });
