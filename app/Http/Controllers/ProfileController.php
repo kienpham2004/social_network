@@ -31,7 +31,7 @@ class ProfileController extends Controller
             foreach($request->file('imageFile') as $key => $file)
             {
                 $name = rand() . "." . $file->getClientOriginalExtension();
-                $file->move(public_path().'/image/', $name);
+                $file->move(public_path() . '/image/', $name);
                 $nameImages[] = [
                     'photo_url' => $name,
                     'post_id' => $post->id,

@@ -30,6 +30,7 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" 
         crossorigin="anonymous">
     <script src="{{ asset('js/search.js') }}"></script>
+    <script src="{{ asset('js/follow.js') }}"></script>
     <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/fontawesome.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/all.js') }}"></script>
@@ -156,7 +157,6 @@
             @yield('profile')
         </main>
     </div>
-    @yield('js')
 </body>
     @jquery
     @toastr_js

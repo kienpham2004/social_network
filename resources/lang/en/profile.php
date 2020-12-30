@@ -12,4 +12,5 @@ return [
     'activity_history' => 'Activity History',
     'upload_avatart' => 'Upload Avatar',
     'follow' => 'Follow',
+    'unfollow' => 'Unfollow',
 ];

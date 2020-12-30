@@ -13,9 +13,11 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
-mix.styles(['resources/css/login.css',], 'public/css/all.css');
-mix.styles(['resources/css/time_line.css',], 'public/css/time_line.css');
-mix.styles(['resources/css/navbar.css',], 'public/css/navbar.css');
-mix.styles(['resources/css/profile.css',], 'public/css/profile.css');
-mix.js(['resources/js/profile.js',], 'public/js/profile.js');
-mix.js(['resources/js/search.js',], 'public/js/search.js');
+mix.styles(['resources/css/login.css',], 'public/css/all.css')
+    .styles('resources/css/time_line.css', 'public/css/time_line.css')
+    .styles('resources/css/navbar.css', 'public/css/navbar.css')
+    .styles('resources/css/profile.css', 'public/css/profile.css')
+    .styles('resources/css/view_user.css', 'public/css/view_user.css');
+mix.js('resources/js/profile.js', 'public/js/profile.js')
+    .js('resources/js/search.js', 'public/js/search.js')
+    .js('resources/js/follow.js', 'public/js/follow.js');

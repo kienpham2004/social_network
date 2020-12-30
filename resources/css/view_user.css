@@ -1,0 +1,14 @@
+.follow_action {
+    display: inline; 
+    margin-top: 7px;
+}
+
+.btn-unfollow {
+    background-color: white; 
+    color: black;
+}
+
+.btn-follow {
+    background-color: #0095f6; 
+    color: white;
+}

@@ -28,4 +28,6 @@ Route::group(['middleware' => 'locale'], function () {
     Route::patch('/profile/upload-avatar/{id}', 'ProfileController@uploadAvatar')->name('profile.upload_avatar');
     Route::get('/profile/{username}', 'TimeLineController@viewUser')->name('wall.your_friend');
     Route::post('/search', 'SearchController@search')->name('search');
+    Route::post('/follow', 'FollowController@follow')->name('user.follow');
+    Route::delete('/unfollow/{id}', 'FollowController@unfollow')->name('user.unfollow');
 });
