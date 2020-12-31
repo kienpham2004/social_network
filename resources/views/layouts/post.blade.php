@@ -107,8 +107,11 @@
                         @include('layouts.comment')
                     </div>
                     <div class="position-relative comment-box">
-                        <input type="text" class="form-control w-100 p-3 add_comment input-post{{ $post->id }}" id="commentValue{{ $post->id }}" placeholder="{{ trans('timeline.add_comment') }}" value="" name="comment" autofocus  >
-                        <button class="btn btn-primary position-absolute btn-ig send-comment" type="submit" data-post-id="{{ $post->id }}">{{ trans('timeline.post') }}</button>
+                        <input type="text" class="form-control w-100 p-3 add_comment input-post{{ $post->id }}" 
+                            id="commentValue{{ $post->id }}" placeholder="{{ trans('timeline.add_comment') }}" 
+                            value="" data-id={{ $post->id }} name="comment" autofocus  >
+                        <button class="btn btn-primary position-absolute btn-ig send-comment{{ $post->id }}" 
+                            type="submit" data-post-id="{{ $post->id }}" disabled>{{ trans('timeline.post') }}</button>
                     </div>
                 </div>
             </div>

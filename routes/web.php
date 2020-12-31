@@ -30,4 +30,7 @@ Route::group(['middleware' => 'locale'], function () {
     Route::post('/search', 'SearchController@search')->name('search');
     Route::post('/follow', 'FollowController@follow')->name('user.follow');
     Route::delete('/unfollow/{id}', 'FollowController@unfollow')->name('user.unfollow');
+    Route::post('/home/comment/add', 'CommentController@comment')->name('comment.add');
+    Route::patch('/comment/edit/{id}', 'CommentController@editComment')->name('comment.edit');
+    Route::delete('/comment/delete/{id}', 'CommentController@deleteComment')->name('comment.delete');
 });
