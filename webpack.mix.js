@@ -18,3 +18,4 @@ mix.styles(['resources/css/time_line.css',], 'public/css/time_line.css');
 mix.styles(['resources/css/navbar.css',], 'public/css/navbar.css');
 mix.styles(['resources/css/profile.css',], 'public/css/profile.css');
 mix.js(['resources/js/profile.js',], 'public/js/profile.js');
+mix.js(['resources/js/search.js',], 'public/js/search.js');

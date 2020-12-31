@@ -8,4 +8,5 @@ return [
     'see_all' => 'See All',
     'follow' => 'Follow',
     'save' => 'Save',
+    'search' => 'Search',
 ];
