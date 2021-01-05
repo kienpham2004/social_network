@@ -2,6 +2,7 @@
 
 @section('css')
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/view_user.css') }}">
 @endsection
 
 @section('content')
@@ -15,17 +16,24 @@
                     </div>
                     <div class="profile-user-settings btn-setting">
                         <h1 class="profile-user-name">{{ $post->user->username }}</h1>
-                        <div class="follow-action">
+                        <div class="follow_action">
+                            @if ($checkFollow)
+                                <button type="button" class="btn profile-edit-btn btn-unfollow" data-token="{{ csrf_token() }}" 
+                                    id="btn-unfollow{{ $post->user->id }}" data-id={{ $post->user->id }} >{{ trans('profile.unfollow') }}</button>
+                            @else
                                 <button type="button" class="btn profile-edit-btn btn-follow" data-token="{{ csrf_token() }}" 
-                                    id="btn-follow{{ $post->user->id }}" data-id={{ $post->user->id }}>{{ trans('profile.follow') }}</button>
+                                    id="btn-follow{{ $post->user->id }}" data-id={{ $post->user->id }} >{{ trans('profile.follow') }}</button>
+                            @endif
                         </div>
                     </div>
                     <div class="profile-stats">
                         <ul>
                             @foreach ($counts as $item)
                                 <li><span class="profile-stat-count">{{ count($posts) }}<span> {{ trans('profile.posts') }}</li>
-                                <li><span class="profile-stat-count span-follower" data-countfollower="{{ $item->follower_count}}">{{ $item->follower_count}}</span> {{ trans('profile.followers') }}</li>
-                                <li><span class="profile-stat-count span-follwing" data-countfollowing="{{ $item->following_count }}">{{ $item->following_count }}</span> {{ trans('profile.following') }}</li>
+                                <li><span class="profile-stat-count span-follower" 
+                                    data-countfollower="{{ $item->follower_count}}">{{ $item->follower_count}}</span> {{ trans('profile.followers') }}</li>
+                                <li><span class="profile-stat-count span-follwing" 
+                                    data-countfollowing="{{ $item->following_count }}">{{ $item->following_count }}</span> {{ trans('profile.following') }}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -81,8 +89,4 @@
         </div>
     </div>
 </main>
-@endsection
-
-@section('js')
-    <script language="JavaScript" type="text/javascript" src="{{ mix('js/profile.js')}}"></script>
 @endsection

@@ -14,7 +14,7 @@
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
-//$app->register(Yoeunes\Toastr\ToastrServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
