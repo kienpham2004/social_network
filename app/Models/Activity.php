@@ -8,6 +8,7 @@ class Activity extends Model
 {
     protected $fillable = [
         'actable_id',
+        'action',
         'actable_type',
         'user_id',
     ];

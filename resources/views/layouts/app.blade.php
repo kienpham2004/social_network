@@ -34,6 +34,7 @@
     <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/fontawesome.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/all.js') }}"></script>
+    <script src="{{ asset('js/comment.js') }}"></script>
 </head>
 <body>
     <div id="app">
@@ -161,5 +162,4 @@
     @jquery
     @toastr_js
     @toastr_render
-@yield('js')
 </html>

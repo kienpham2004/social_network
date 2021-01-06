@@ -2,12 +2,6 @@
     color: black;
 }
 
-/* .topbar-profile-photo {
-    width: 1.5em; 
-    height: 1.5em; 
-    position: relative;
-} */
-
 .story-profile-photo {
     width: 56px; 
     height: 56px; 
@@ -62,11 +56,11 @@
     font-weight: 700;
 }
 
-.info{
+.info {
     color: black;
 }
 
-.info:hover{
+.info:hover {
     color: black;
     text-decoration: none;
 }
@@ -81,24 +75,24 @@
     font-size: 14px
 }
 
-.suggess{
+.suggess {
     position: fixed !important;
     top: 98px !important;
     right: 243px !important;
     width: 300px !important;
 }
 
-.info_flex{
+.info_flex {
     display: flex;
 }
 
-#btn-follow{
+#btn-follow {
     background-color: #0095f6;
     color: white;
     margin-bottom: 10px;
 }
 
-.send-comment{
+.send-comment {
     height: 25px !important;
     background-color: transparent !important;
     color: blue !important;
@@ -106,7 +100,7 @@
     margin-right: 10px !important;
 }
 
-.send-comment:disabled{
+.send-comment:disabled {
     background-color: transparent;
     color: black;
 }
@@ -117,33 +111,33 @@
     margin-right: 8px;
 }
 
-.deleteComment{
+.deleteComment {
     color: black;
     font-size: 10px;
 }
 
-.card-header{
+.card-header {
     background-color: white;
 }
 
-.col-8{
+.col-8 {
     max-width: 59% !important;
 }
 
-.avatar-img{
+.avatar-img {
     transform: scale(1.5) !important;
     width: 100% !important; 
     position: absolute !important; 
     left: 0 !important;
 }
 
-.icon{
+.icon {
     font-size: 13px !important;
     width: 1.6em !important;
     height: 1.6em !important;
 }
 
-.avatar-img{
+.avatar-img {
     transform: scale(1.5);
     width: 100%;
     position: absolute; 
@@ -153,28 +147,38 @@
 .item-comment {
     padding-bottom: 15px !important; 
     padding-top: 5px !important;
+    margin-top: 7px;
 }
 
-.deleteComment{
+.deleteComment {
     float: right !important;
 }
 
-.editComment{
+.editComment {
     float: right !important;
 }
 
-.formEditComment{
-    display: none !important;
+.formEditComment {
+    display: none;
 }
 
-.actionEditPost{
+.actionEditPost {
     float: right !important;
 }
 
-.inputEditComment{
+.inputEditComment {
     width: 100% !important;
 }
 
-.header-post{
+.header-post {
     background-color: white !important;
+}
+
+.submitEditComment {
+    background-color:#4285f8; 
+    border-radius: 2px; 
+    border: 1px solid white; 
+    padding: 4px; 
+    margin-top: 2px;  
+    color: white;
 }
