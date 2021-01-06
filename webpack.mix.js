@@ -21,4 +21,5 @@ mix.styles(['resources/css/login.css',], 'public/css/all.css')
 mix.js('resources/js/profile.js', 'public/js/profile.js')
     .js('resources/js/search.js', 'public/js/search.js')
     .js('resources/js/comment.js', 'public/js/comment.js')
+    .js('resources/js/like_post.js', 'public/js/like_post.js')
     .js('resources/js/follow.js', 'public/js/follow.js');

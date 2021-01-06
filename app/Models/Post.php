@@ -12,6 +12,9 @@ class Post extends Model
         'total_like',
     ];
 
+    const UNLIKED = 0;
+    const LIKED = 1;
+
     public function images()
     {
         return $this->hasMany(Image::class);

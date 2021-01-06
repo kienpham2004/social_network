@@ -29,6 +29,13 @@ class HomeController extends Controller
     {
         $posts = Post::with("user", "images", "comments")->withCount('users')->orderBy('created_at', 'desc')->get();
         
+        foreach ($posts as $post) {
+            $post->status = Post::UNLIKED;
+            if (DB::table('likes')->where([['user_id', Auth::user()->id], ['post_id', $post->id]])->exists()) {
+                $post->status = Post::LIKED;
+            }
+        }
+        
         return view('time_line', compact('posts'));
     }
 }
