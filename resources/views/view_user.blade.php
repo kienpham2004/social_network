@@ -52,7 +52,7 @@
         <div class="gallery">
             @foreach ($posts as $post)
                 <div class="gallery-item" tabindex="0">
-                    <a class="show-post" href="" >
+                    <a class="show-post" href="{{ route('profile.show-post', $post->id) }}" >
                         <i class="fas fa-heart"></i>
                             <div class="countLike">{{ $post->users_count }}</div>
                         <i class="fas fa-comment"></i>

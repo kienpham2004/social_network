@@ -34,7 +34,7 @@ class LikeController extends Controller
         $like->delete();
 
         $result = [
-            'post_id' => $like->post_id,
+            'post_id' => $id,
         ];
 
         return response()->json($result);

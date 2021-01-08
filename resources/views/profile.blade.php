@@ -30,15 +30,67 @@
                 </div>
                 <div class="profile-stats">
                     <ul>
-                        <li><span class="profile-stat-count">3<span> {{ trans('profile.posts') }}</li>
-                        <li>
-                            <a href="" class="profile-stat-count" type="button" data-toggle="modal" 
-                                data-target="#follower">3</span> {{ trans('profile.followers') }}</a>
-                        </li>
-                        <li>
-                            <a href="" class="profile-stat-count" type="button" data-toggle="modal" 
-                                data-target="#following">3</span> {{ trans('profile.following') }}</a>
-                        </li>
+                        @foreach ($counts as $item)
+                        <li><span class="profile-stat-count">{{ count($posts->toArray()) }}<span> {{ trans('profile.posts') }}</li>
+                        <li><a href="" class="profile-stat-count show-follower" type="button" data-toggle="modal" data-target="#follower" >{{ $item->follower_count }}</span> {{ trans('profile.followers') }}</a></li>
+                        <li><a href="" class="profile-stat-count show-following" type="button" data-toggle="modal" data-target="#following">{{ $item->following_count }}</span> {{ trans('profile.following') }}</a></li>
+                                {{-- follower --}}
+                        <div class="modal" id="follower">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title">{{ trans('profile.follower_list') }}</h1>
+                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="line-height">
+                                            @foreach ($followers as $item)
+                                                <div class="flex-follower">
+                                                    <div
+                                                        class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center border topbar-profile-photo profile-image">
+                                                        <img src="{{ asset(config('url.url_avatar') . $item->avatar) }}" class="avt-in-list" alt="...">
+                                                    </div>
+                                                    &nbsp;
+                                                    &nbsp;
+                                                    <a href="{{ route('wall.your_friend', $item->username) }}">{{$item->username}}
+                                                    </a>
+                                                </div>
+                                                <hr>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                {{-- follwing --}}
+                        <div class="modal" id="following">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title">{{ trans('profile.following_list') }}</h1>
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="line-height">
+                                        @foreach ($following as $item)
+                                            <div class="flex-follower">
+                                                <div
+                                                    class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center border topbar-profile-photo profile-image">
+                                                    <img src="{{ asset('avatar/'. $item->avatar) }}" class="avt-in-list" alt="...">
+                                                </div>
+                                                &nbsp;
+                                                &nbsp;
+                                                <a href="{{ route('wall.your_friend', $item->username) }}">{{$item->username}}
+                                                </a>
+                                            </div>
+                                            <hr>
+                                        @endforeach
+                                    </div>
+                                </div>   
+                            </div>
+                            </div>
+                        </div>
+                    @endforeach
                     </ul>
                 </div>
                 <div class="profile-bio">
@@ -92,7 +144,8 @@
             <div class="gallery">
                 @foreach ($posts as $post)
                     <div class="gallery-item" tabindex="0">
-                        <a class="show-post" id="post{{ $post->id }}" href="" >
+                        {{ $post->id }}
+                        <a class="show-post" id="post{{ $post->id }}" href="{{ route('profile.show-post', $post->id) }}" >
                             <i class="fas fa-heart"></i>
                                 <div class="countLike">{{ $post->users_count }}</div>
                             <i class="fas fa-comment"></i>

@@ -18,3 +18,4 @@ yarn-error.log
 /public/image
 /public/.bowerrc
 /public/avatar
+coverage/
