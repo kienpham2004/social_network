@@ -49,7 +49,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Post::class, 'likes');
     }
 
-    public function roles()
+    public function role()
     {
         return $this->belongsTo(User::class);
     }
@@ -72,11 +72,6 @@ class User extends Authenticatable
     public function activities()
     {
         return $this->hasMany(Activity::class);
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class);
     }
 
     public function follows()
