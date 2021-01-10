@@ -9,4 +9,7 @@ return [
     'follow' => 'Theo dõi',
     'save' => 'Lưu',
     'search' => 'Tìm kiếm',
+    'load_more' => 'Tải thêm',
+    'view' => 'Xem',
+    'comments' => 'bình luận',
 ];

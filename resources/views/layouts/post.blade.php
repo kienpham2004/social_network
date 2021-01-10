@@ -1,4 +1,4 @@
-<div class="col-8">
+<div class="col-8" id="loadPost">
     @foreach ($posts as $post) 
         <div class="d-flex flex-column mt-4 mb-4 post_user">
             <div class="card">
@@ -26,7 +26,7 @@
                             <div id="caro{{ $post->id }}" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     @foreach ($post->images as $item)
-                                        @if ($item->id == $post->images[0]->id)
+                                        @if ($item->id == $post->images[config('check_var_on_view.count_element_image_0')]->id)
                                             <div class="carousel-item active" data-interval="10000">
                                                 <img src="{{ asset('image/' . $item->photo_url) }}" class="gallery-image d-block w-100" alt="">
                                             </div>
@@ -35,14 +35,14 @@
                                                 <img src="{{ asset('image/' . $item->photo_url) }}" class="gallery-image d-block w-100" alt="">
                                             </div>
                                         @endif
-                                        @if ($post->images->count() != config('check_var_on_view.check_1'))
+                                        @if ($post->images->count() != config('check_var_on_view.count_image_1'))
                                             <a class="carousel-control-prev" href="#caro{{ $post->id }}" role="button" data-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                <span class="sr-only">Previous</span>
+                                                <span class="sr-only"></span>
                                             </a>
                                             <a class="carousel-control-next" href="#caro{{ $post->id }}" role="button" data-slide="next">
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                <span class="sr-only">Next</span>
+                                                <span class="sr-only"></span>
                                             </a>
                                         @endif
                                     @endforeach
@@ -52,7 +52,7 @@
                     <div class="d-flex flex-row justify-content-between pl-3 pr-3 pt-3 pb-1">
                         <ul class="list-inline d-flex flex-row align-items-center m-0">
                             <li class="list-inline-item">                 
-                                @if ($post->status == config('check_var_on_view.check_1'))
+                                @if (in_array($post->id, $likeArr))
                                     <button class="btn p-0 button-unlike" data-count="{{ $post->users_count }}" data-token="{{ csrf_token() }}" 
                                             id="unlike{{ $post->id }}" data-id="{{ $post->id }}">
                                         <svg class="icon" viewBox="0 0 16 16"
@@ -109,13 +109,19 @@
                     </div>
                     <div class="pl-3 pr-3 pb-2">
                         <strong class="d-block"><span class="count-like{{ $post->id }}">{{ $post->users_count }} </span>
-                            @if ($post->users_count > config('check_var_on_view.check_1'))
+                            @if ($post->users_count > config('check_var_on_view.count_comment_1'))
                                 {{ trans('timeline.likes') }}
                             @else
                                 {{ trans('timeline.like') }}
                             @endif
                         </strong>
                         <p><strong>{{ $post->user->username }}</strong>   {{ $post->caption }}</p>
+                        <hr>
+                        @if ($post->comments_count > config('check_var_on_view.count_comment_2'))
+                            <button class="btn p-0 view_comment{{ $post->id }}">
+                                <span class="text-muted view_comment" id="view_comment{{ $post->id }}" data-post-id="{{$post->id }}">{{ trans('timeline.view') }} {{ $post->comments_count - 2 }} {{ trans('timeline.comments') }}</span>
+                            </button>
+                        @endif
                         @include('layouts.comment')
                     </div>
                     <div class="position-relative comment-box">
@@ -129,4 +135,5 @@
             </div>
         </div>
     @endforeach
+    <button type="button" class="btn btn-primary btn-loadmore" value="{{ $post->id }}" >{{ trans('timeline.load_more') }}</button>
 </div>

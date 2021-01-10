@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Follow;
+use App\Models\Like;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -27,15 +30,67 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::with("user", "images", "comments")->withCount('users')->orderBy('created_at', 'desc')->get();
+        $user = Auth::user()->following
+            ->pluck('id')
+            ->toArray();
+        $suggessForYou = User::with('following')
+            ->withCount('posts')
+            ->whereNotIn('id', $user)
+            ->orderBy('posts_count', 'desc')
+            ->get();
+        $posts = Post::with("user", "images", "comments")
+            ->whereIn('user_id', $user)
+            ->withCount('users', 'comments')
+            ->orderBy('created_at', 'desc')
+            ->take(config('var_in_controller.equals_3'))
+            ->get();
+        $likes = Like::select('post_id')
+            ->where('user_id', Auth::user()->id)
+            ->get();
+        $likeArr = Arr::flatten($likes->toArray());
+
+        return view('time_line', compact('posts', 'suggessForYou', 'likeArr'));
+    }
+
+    public function loadPost(Request $request)
+    {
+        $id = $request->id;
+        $user = Auth::user()->following
+            ->pluck('id')
+            ->toArray();
+        $posts = Post::with("user", "images", "comments")
+            ->whereIn('user_id', $user)
+            ->where('id', '<' , $request->id)
+            ->withCount('users', 'comments')
+            ->orderBy('created_at', 'desc')
+            ->take(config('var_in_controller.take_record_3'))
+            ->get();
+        $likes = Like::select('post_id')
+            ->where('user_id', Auth::user()->id)
+            ->get();
+        $likeArr = Arr::flatten($likes->toArray());
         
-        foreach ($posts as $post) {
-            $post->status = Post::UNLIKED;
-            if (DB::table('likes')->where([['user_id', Auth::user()->id], ['post_id', $post->id]])->exists()) {
-                $post->status = Post::LIKED;
-            }
-        }
-        
-        return view('time_line', compact('posts'));
+        return view('layouts.load-post', compact('posts', 'likeArr'));
+    }
+
+    public function viewComment(Request $request)
+    {
+        $id = $request->id;
+        $user = Auth::user()->following
+            ->pluck('id')
+            ->toArray();
+        $posts = Post::with("user", "images", "comments")
+            ->whereIn('user_id', $user)
+            ->where('id', '<' , $request->id)
+            ->withCount('users', 'comments')
+            ->orderBy('created_at', 'desc')
+            ->take(config('var_in_controller.take_record_3'))
+            ->get();
+        $likes = Like::select('post_id')
+            ->where('user_id', Auth::user()->id)
+            ->get();
+        $likeArr = Arr::flatten($likes->toArray());
+
+        return view('layouts.load-comment', compact('posts', 'likeArr'));
     }
 }

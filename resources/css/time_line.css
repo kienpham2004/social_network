@@ -103,6 +103,7 @@
 .send-comment:disabled {
     background-color: transparent;
     color: black;
+    height: 25px;
 }
 
 .editComment {
@@ -190,4 +191,32 @@
 
 .button-like {
     font-size: 16px !important;
+}
+
+.comment-avt {
+    line-height: 25px;
+}
+
+.avt-in-comment {
+    transform: scale(1.5); 
+    width: 100%;
+}
+
+.inputEditComment {
+    width: 100%;
+}
+
+.btn-loadmore {
+    color: white;
+    background-color: #0879fa;
+    padding: 8px;
+    margin-left: 185px;
+}
+
+.icon-right {
+    float: right;
+}
+
+.form-none {
+    display: none;
 }

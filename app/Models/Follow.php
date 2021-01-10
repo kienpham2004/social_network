@@ -11,6 +11,9 @@ class Follow extends Model
         'follow_id',
     ];
 
+    const FOLLOW = 1;
+    const UNFOLLOW = 0;
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

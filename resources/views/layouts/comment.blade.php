@@ -1,5 +1,5 @@
 <div id="listComment{{ $post->id }}">
-    @foreach ($post->comments as $item)
+    @foreach ($post->comments->slice(config('check_var_on_view.start_fisrt_record_0'), config('check_var_on_view.last_record_2')) as $item)
         <div class="item-comment item-comment{{ $item->id }}">
             <div class="show_comment{{ $item->id }}" data-id="{{ $item->id }}">
                 <strong>{{ $item->user->username }}</strong>

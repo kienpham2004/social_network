@@ -9,4 +9,7 @@ return [
     'follow' => 'Follow',
     'save' => 'Save',
     'search' => 'Search',
+    'load_more' => 'Load More',
+    'view' => 'View',
+    'comments' => 'comments',
 ];

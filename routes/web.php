@@ -37,4 +37,6 @@ Route::group(['middleware' => 'locale'], function () {
     Route::delete('/unlike/post/{id}', 'LikeController@unlike')->name('unlike');
     Route::get('/show-post/{id}', 'ProfileController@showPost')->name('profile.show-post');
     Route::get('/back/{id}', 'ProfileController@back')->name('profile.back');
+    Route::post('/home/load-post', 'HomeController@loadPost')->name('home.load_post');
+    Route::post('/home/view-comment', 'HomeController@viewComment')->name('home.view_comment');
 });

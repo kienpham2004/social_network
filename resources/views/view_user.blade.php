@@ -71,7 +71,7 @@
                                     </div>
                                 @endif
                                 
-                                @if ($post->images->count() != config('check_var_on_view.check_1'))
+                                @if ($post->images->count() != config('check_var_on_view.count_image_1'))
                                     <a class="carousel-control-prev" href="#caro{{ $post->id }}" role="button" data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="sr-only"></span>
