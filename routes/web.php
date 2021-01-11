@@ -35,4 +35,6 @@ Route::group(['middleware' => 'locale'], function () {
     Route::delete('/comment/delete/{id}', 'CommentController@deleteComment')->name('comment.delete');
     Route::post('/like/post', 'LikeController@like')->name('like');
     Route::delete('/unlike/post/{id}', 'LikeController@unlike')->name('unlike');
+    Route::get('/show-post/{id}', 'ProfileController@showPost')->name('profile.show-post');
+    Route::get('/back/{id}', 'ProfileController@back')->name('profile.back');
 });

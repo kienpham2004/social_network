@@ -10,14 +10,21 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostStatusRequest;
 use App\Models\Image;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Models\Activity;
 
 class ProfileController extends Controller
 {
     public function index()
-    {
-        $posts = Post::with('images')->where('user_id', Auth::id() )->withCount('users', 'comments')->latest('created_at')->get();
-   
-        return view('profile', compact('posts'));
+    {    
+        $id = Auth::user()->id;
+        $posts = Post::with('images')->where('user_id', $id )->withCount('users', 'comments')->latest('created_at')->get();
+        $counts = User::where('id', $id)->withCount('follower', 'following')->get();
+        $users = Auth::user()->load('follower')->loadCount('follower', 'following');
+        $following = $users->following;
+        $followers = $users->follower;
+
+        return view('profile', compact('posts', 'counts', 'following', 'followers'));
     }
 
     public function postStatus(PostStatusRequest $request)
@@ -62,5 +69,66 @@ class ProfileController extends Controller
 
         return redirect()->back(); 
 
+    }
+
+    public function showPost($id)
+    {
+        $check = Post::where('id', $id)->exists();
+        if (!$check) {
+            abort(404);
+        } else {
+            $posts = Post::with('user', 'images', 'comments')
+                ->withCount('users')
+                ->where('id', $id)->get();
+
+            foreach ($posts as $item) {
+                $checkLike = DB::table('likes')->where([
+                    ['user_id', Auth::user()->id], 
+                    ['post_id', $item->id]
+                ])->exists();
+            }
+            
+            return view('show-post', compact('post', 'checkLike'));
+        }
+    }
+
+    public function back($id)
+    {   
+        $idUser = Auth::user()->id;
+        $check = Post::where('id', $id)->exists();
+        if (!$check) {
+            abort(404);
+        } else {
+            $counts = User::where('id', $idUser)->withCount('follower', 'following')->get();
+            $post = Post::with('user', 'images', 'comments')->where('id', $id )->withCount('users', 'comments')->latest('created_at')->get();
+            foreach ($post as $item) {
+                if ($item->user_id == $idUser) {
+                    $users = Auth::user()->load('follower')->loadCount('follower', 'following');
+                    $following = $users->following;
+                    $followers = $users->follower;
+                    $checkFollow = DB::table('follows')->where([
+                        ['follow_id', $item->user_id],
+                        ['user_id', $idUser]
+                    ])->exists();
+                    $posts = Post::with('images')->where('user_id', $idUser)->withCount('users', 'comments')->latest('created_at')->get();
+                    $counts = User::where('id', $idUser)->withCount('follower', 'following')->get();
+
+                    return view('profile', compact('posts', 'counts', 'users', 'following', 'followers', 'checkFollow'));
+                } else {
+                    $users = Auth::user()->load('follower', 'following')->loadCount('follower', 'following');
+                    $following = $users->following;
+                    $followers = $users->follower;
+                    $checkFollow = DB::table('follows')->where([
+                        ['follow_id', $item->user_id],
+                        ['user_id', $idUser]
+                    ])->exists();
+                    $user = User::where('username', $item->user->username)->get();
+                    $posts = Post::with('user', 'images', 'comments')->where('user_id', $user[0]->id)->withCount('users', 'comments')->orderBy('created_at', 'desc')->get();
+                    $counts = User::where('id', $idUser)->withCount('follower', 'following')->get();
+
+                    return view('view_user', compact('posts', 'counts', 'users', 'following', 'followers', 'checkFollow'));
+            }
+        }
+        }
     }
 }
