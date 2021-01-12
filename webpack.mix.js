@@ -24,4 +24,5 @@ mix.js('resources/js/profile.js', 'public/js/profile.js')
     .js('resources/js/comment.js', 'public/js/comment.js')
     .js('resources/js/like_post.js', 'public/js/like_post.js')
     .js('resources/js/show_post.js', 'public/js/show_post.js')
+    .js('resources/js/paginate.js', 'public/js/paginate.js')
     .js('resources/js/follow.js', 'public/js/follow.js');

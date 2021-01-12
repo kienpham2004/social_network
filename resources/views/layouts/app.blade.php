@@ -34,6 +34,7 @@
     <script src="{{ asset('js/like_post.js') }}"></script>
     <script src="{{ asset('js/profile.js') }}"></script>
     <script src="{{ asset('js/show_post.js') }}"></script>
+    <script src="{{ asset('js/paginate.js') }}"></script>
     <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/fontawesome.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/all.js') }}"></script>
