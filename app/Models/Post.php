@@ -32,7 +32,7 @@ class Post extends Model
 
     public function activities()
     {
-        return $this->morphToMany(Activity::class, 'actable');
+        return $this->morphMany(Activity::class, 'actable');
     }
 
     public function comments()
