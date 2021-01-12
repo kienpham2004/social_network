@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function(){
-    return view('welcome');
-})->name('index');
+Route::get('/', function () {
+    return view('auth.login');
+});
+
+Route::get('admin/home', 'AdminController@index')->name('admin.home');
+Route::get('admin/manager/users', 'AdminController@listUsers')->name('admin.manager');
+Route::patch('admin/manager/edit-status/disabled/{id}', 'AdminController@changeStatusDisabled')->name('change.status_disabled');
+Route::patch('admin/manager/edit-status/active/{id}', 'AdminController@changeStatusActive')->name('change.status_active');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
