@@ -137,7 +137,7 @@
     
                             <li class="nav-item dropdown">
                                 <div class="dropdown" id="navbarDropdown">
-                                    <span>{{ Auth::user()->fullname }}</span>
+                                    <span>{{ Auth::user()->username }}</span>
                                 </div>
                                 <div class="dropdown-content">
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">

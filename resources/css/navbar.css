@@ -439,31 +439,31 @@ img {
     top: 0;
 }
 
-.sidebar_menu{
+.sidebar_menu {
     position: fixed;
     right: 180px;
     top: 110px; 
     width: 290px;
 }
 
-.fb{
+.fb {
     display: flex;
 }
 
-#result{
+#result {
     position: absolute;
     width: 350px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 
 }
 
-.search-input{
+.search-input {
     width: 350px !important;
     border-radius: 100px !important;
     margin-top: 5px;
 }
 
-.show_suggess_user{
+.show_suggess_user {
     display:block !important; 
     position:relative !important;
     width: auto !important; 
@@ -473,7 +473,11 @@ img {
     line-height: 25px !important;
 }
 
-.user_suggess{
+.user_suggess {
     display: block !important; 
     padding-left: 10px !important;
+}
+
+.action-user {
+    line-height: 5px;
 }

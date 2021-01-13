@@ -1,0 +1,21 @@
+<?php 
+return [
+    'admin' => 'Quản trị viên',
+    'profile' => 'Thông tin',
+    'settings' => 'Cài đặt',
+    'activity_log' => 'Lịch sử hoạt động',
+    'logout' => 'Đăng xuất',
+    'no.' => '#',
+    'username' => 'Tên người dùng',
+    'role' => 'Quyền',
+    'email' => 'Email',
+    'status' => 'Trạng thái',
+    'create_at' => 'Tạo ngày',
+    'action' => 'Hành động',
+    'hello' => 'Xin chào',
+    'home' => 'Trang chủ',
+    'dashboard' => 'Bảng điều khiển',
+    'components' => 'Các thành phần',
+    'charts' => 'Biểu đồ',
+    'tables' => 'Bảng',
+];
