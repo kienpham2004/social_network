@@ -2,25 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\User;
 use App\Http\Requests\UploadAvatarRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostStatusRequest;
 use App\Models\Image;
+use App\Repositories\Follow\FollowRepositoryInterface;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Models\Activity;
+use App\Repositories\Like\LikeRepositoryInterface;
+use App\Repositories\Profile\ProfileRepositoryInterface;
+use App\Repositories\Post\PostRepositoryInterface;
 
 class ProfileController extends Controller
 {
+    protected $profileRepo, $postRepo, $likeRepo, $followRepo;
+
+    public function __construct(
+        ProfileRepositoryInterface $profileRepo, 
+        PostRepositoryInterface $postRepo,
+        LikeRepositoryInterface $likeRepo,
+        FollowRepositoryInterface $followRepo
+    ) {
+        $this->profileRepo = $profileRepo;
+        $this->postRepo = $postRepo;
+        $this->likeRepo = $likeRepo;
+        $this->followRepo = $followRepo;
+    }
+
     public function index()
     {    
         $id = Auth::user()->id;
-        $posts = Post::with('images')->where('user_id', $id )->withCount('users', 'comments')->latest('created_at')->get();
-        $counts = User::where('id', $id)->withCount('follower', 'following')->get();
-        $users = Auth::user()->load('follower')->loadCount('follower', 'following');
+        $posts = $this->postRepo->getPostLatest($id);
+        $counts = $this->profileRepo->loadFollowerAndCountFollower($id);
+        $users = $this->profileRepo->getFollowerAndFollowing();
         $following = $users->following;
         $followers = $users->follower;
 
@@ -30,11 +44,11 @@ class ProfileController extends Controller
     public function postStatus(PostStatusRequest $request)
     {
         if ($request->hasFile('imageFile')) {
-            $post = Post::create([
+            $data = [ 
                 'caption' => $request->caption,
-                'user_id' => Auth::id(),
-            ]);
-
+                'user_id' => Auth::user()->id,
+            ];
+            $post = $this->postRepo->create($data);
             foreach($request->file('imageFile') as $key => $file)
             {
                 $name = rand() . "." . $file->getClientOriginalExtension();
@@ -56,36 +70,28 @@ class ProfileController extends Controller
 
     public function uploadAvatar(UploadAvatarRequest $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = $this->profileRepo->find($id);
 
         if ($request->file('avatarFile')) {
             $imagePath = $request->file('avatarFile');
             $imageName = rand() . "." . $imagePath->getClientOriginalExtension();
             $path = $request->file('avatarFile')->move(public_path() . '/avatar/', $imageName);
         }
-
         $user->avatar = $imageName;
         $user->save();
 
         return redirect()->back(); 
-
     }
 
     public function showPost($id)
     {
-        $check = Post::where('id', $id)->exists();
+        $check = $this->postRepo->getPostWhereIdExists($id);
         if (!$check) {
             abort(404);
         } else {
-            $posts = Post::with('user', 'images', 'comments')
-                ->withCount('users')
-                ->where('id', $id)->get();
-
-            foreach ($posts as $item) {
-                $checkLike = DB::table('likes')->where([
-                    ['user_id', Auth::user()->id], 
-                    ['post_id', $item->id]
-                ])->exists();
+            $post = $this->postRepo->getPosts($id);
+            foreach ($post as $item) {
+                $checkLike = $this->likeRepo->checkLike($item->id);
             }
             
             return view('show-post', compact('post', 'checkLike'));
@@ -95,36 +101,30 @@ class ProfileController extends Controller
     public function back($id)
     {   
         $idUser = Auth::user()->id;
-        $check = Post::where('id', $id)->exists();
+        $check = $this->postRepo->getPostWhereIdExists($id);
         if (!$check) {
             abort(404);
         } else {
-            $counts = User::where('id', $idUser)->withCount('follower', 'following')->get();
-            $post = Post::with('user', 'images', 'comments')->where('id', $id )->withCount('users', 'comments')->latest('created_at')->get();
+            $counts = $this->profileRepo->loadFollowerAndCountFollower($idUser);
+            $post = $this->postRepo->getPostWithUserImageCommentLatest('id', $id);
             foreach ($post as $item) {
                 if ($item->user_id == $idUser) {
-                    $users = Auth::user()->load('follower')->loadCount('follower', 'following');
+                    $users = $this->profileRepo->getFollowerAndFollowing();
                     $following = $users->following;
                     $followers = $users->follower;
-                    $checkFollow = DB::table('follows')->where([
-                        ['follow_id', $item->user_id],
-                        ['user_id', $idUser]
-                    ])->exists();
-                    $posts = Post::with('images')->where('user_id', $idUser)->withCount('users', 'comments')->latest('created_at')->get();
-                    $counts = User::where('id', $idUser)->withCount('follower', 'following')->get();
-
+                    $checkFollow = $this->followRepo->checkFollow($item->user_id, $idUser);
+                    $posts = $this->postRepo->getPostLatest($idUser);
+                    $counts = $this->profileRepo->loadFollowerAndCountFollower($idUser);
+                        
                     return view('profile', compact('posts', 'counts', 'users', 'following', 'followers', 'checkFollow'));
                 } else {
-                    $users = Auth::user()->load('follower', 'following')->loadCount('follower', 'following');
+                    $users = $this->profileRepo->getFollowerAndFollowing();
                     $following = $users->following;
                     $followers = $users->follower;
-                    $checkFollow = DB::table('follows')->where([
-                        ['follow_id', $item->user_id],
-                        ['user_id', $idUser]
-                    ])->exists();
-                    $user = User::where('username', $item->user->username)->get();
-                    $posts = Post::with('user', 'images', 'comments')->where('user_id', $user[0]->id)->withCount('users', 'comments')->orderBy('created_at', 'desc')->get();
-                    $counts = User::where('id', $idUser)->withCount('follower', 'following')->get();
+                    $user = $this->profileRepo->getUserByCondition('username', $item->user->username);
+                    $checkFollow = $this->followRepo->checkFollow($item->user_id, $idUser);
+                    $posts = $this->postRepo->getPostWithUserImageCommentLatest('user_id', $user[0]->id);
+                    $counts =  $this->profileRepo->loadFollowerAndCountFollower($idUser);
 
                     return view('view_user', compact('posts', 'counts', 'users', 'following', 'followers', 'checkFollow'));
             }
