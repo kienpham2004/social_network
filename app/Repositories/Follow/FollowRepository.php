@@ -27,6 +27,6 @@ class FollowRepository extends BaseRepository implements FollowRepositoryInterfa
         return Follow::where([
             ['user_id', Auth::id()],
             ['follow_id', $id]
-        ]);
+        ])->get();
     }
 }

@@ -27,7 +27,7 @@ class LikeRepository extends BaseRepository implements LikeRepositoryInterface
         return Like::where([
             ['user_id', Auth::id()],
             ['post_id', $id]
-        ]);
+        ])->get();
     }
 
     public function selectLikePostId()
