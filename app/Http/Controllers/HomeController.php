@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use App\Models\User;
-use App\Models\Follow;
-use App\Models\Like;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Repositories\Profile\ProfileRepositoryInterface;
+use App\Repositories\Post\PostRepositoryInterface;
+use App\Repositories\Like\LikeRepositoryInterface;
 
 class HomeController extends Controller
 {
@@ -18,36 +14,26 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    protected $postRepo, $profileRepo, $likeRepo;
+
+    public function __construct(
+        ProfileRepositoryInterface $profileRepo, 
+        PostRepositoryInterface $postRepo,
+        LikeRepositoryInterface $likeRepo
+    ) {
         $this->middleware('checkstatus');
+        $this->profileRepo = $profileRepo;
+        $this->postRepo = $postRepo;
+        $this->likeRepo = $likeRepo;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        $user = Auth::user()->following
-            ->pluck('id')
-            ->toArray();
-        $suggessForYou = User::with('following')
-            ->withCount('posts')
-            ->whereNotIn('id', $user)
-            ->orderBy('posts_count', 'desc')
-            ->get();
-        $posts = Post::with("user", "images", "comments")
-            ->whereIn('user_id', $user)
-            ->withCount('users', 'comments')
-            ->orderBy('created_at', 'desc')
-            ->take(config('var_in_controller.equals_3'))
-            ->get();
-        $likes = Like::select('post_id')
-            ->where('user_id', Auth::user()->id)
-            ->get();
-        $likeArr = Arr::flatten($likes->toArray());
+        $user = $this->profileRepo->getIdFollowingPluckId();
+        $suggessForYou = $this->profileRepo->getListSuggess($user);
+        $posts = $this->postRepo->getPostLimit($user);
+        $likes = $this->likeRepo->selectLikePostId();
+        $likeArr = $this->likeRepo->convertArrLike($likes);
 
         return view('time_line', compact('posts', 'suggessForYou', 'likeArr'));
     }
@@ -55,20 +41,10 @@ class HomeController extends Controller
     public function loadPost(Request $request)
     {
         $id = $request->id;
-        $user = Auth::user()->following
-            ->pluck('id')
-            ->toArray();
-        $posts = Post::with("user", "images", "comments")
-            ->whereIn('user_id', $user)
-            ->where('id', '<' , $request->id)
-            ->withCount('users', 'comments')
-            ->orderBy('created_at', 'desc')
-            ->take(config('var_in_controller.take_record_3'))
-            ->get();
-        $likes = Like::select('post_id')
-            ->where('user_id', Auth::user()->id)
-            ->get();
-        $likeArr = Arr::flatten($likes->toArray());
+        $user = $this->profileRepo->getIdFollowingPluckId();
+        $posts = $this->postRepo->getPostLoadMore($user, $id);
+        $likes = $this->likeRepo->selectLikePostId();
+        $likeArr = $this->likeRepo->convertArrLike($likes);
         
         return view('layouts.load-post', compact('posts', 'likeArr'));
     }
@@ -76,20 +52,10 @@ class HomeController extends Controller
     public function viewComment(Request $request)
     {
         $id = $request->id;
-        $user = Auth::user()->following
-            ->pluck('id')
-            ->toArray();
-        $posts = Post::with("user", "images", "comments")
-            ->whereIn('user_id', $user)
-            ->where('id', '<' , $request->id)
-            ->withCount('users', 'comments')
-            ->orderBy('created_at', 'desc')
-            ->take(config('var_in_controller.take_record_3'))
-            ->get();
-        $likes = Like::select('post_id')
-            ->where('user_id', Auth::user()->id)
-            ->get();
-        $likeArr = Arr::flatten($likes->toArray());
+        $user = $this->profileRepo->getIdFollowingPluckId();
+        $posts = $this->postRepo->getPostLoadMore($user, $id);
+        $likes = $this->likeRepo->selectLikePostId();
+        $likeArr = $this->likeRepo->convertArrLike($likes);
 
         return view('layouts.load-comment', compact('posts', 'likeArr'));
     }
