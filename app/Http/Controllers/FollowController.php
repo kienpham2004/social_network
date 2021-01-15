@@ -22,23 +22,42 @@ class FollowController extends Controller
             'user_id' => Auth::user()->id,
             'follow_id' => $request->id,
         ];
-        $follow = $this->followRepo->create($data);
-        $result = [
-            'user_id' => $follow->user_id,
-            'follow_id' => $follow->follow_id, 
-        ]; 
 
-        return response()->json($result);
+        $follow = $this->followRepo->create($data);
+        if (empty($follow)) {
+            $data = [
+                'status' => config('id.status_fail_404'),
+                'message' => trans('mes.fail'),
+            ];
+
+            return response()->json($data);
+        } else {
+            $result = [
+                'user_id' => $follow->user_id,
+                'follow_id' => $follow->follow_id, 
+            ]; 
+    
+            return response()->json($result);
+        }
     }
 
     public function unfollow($id)
     {
-        $follow = $this->followRepo->findIdUser($id);
-        $unfollow = $this->followRepo->delete($follow->first()->id);
-        $result = [
-            'follow_id' => $id, 
-        ];
+        $followId = $this->followRepo->findIdUser($id);
+        if (empty($followId)) {
+            $result = [
+                'status' => config('id.status_fail_404'),
+                'message' => trans('mes.fail'),
+            ];
 
-        return response()->json($result);
+            return response()->json($result);
+        } else {
+            $unfollow = $this->followRepo->delete($followId);
+            $result = [
+                'follow_id' => $id, 
+            ];
+    
+            return response()->json($result);
+        }
     }
 }

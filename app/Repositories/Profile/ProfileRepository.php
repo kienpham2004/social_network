@@ -24,6 +24,11 @@ class ProfileRepository extends BaseRepository implements ProfileRepositoryInter
         return User::with($with)->withCount($withCount)->where($column, $value)->get();
     }
 
+    public function getUserByUsername($value)
+    {
+        return User::with('posts')->withCount('follower', 'following')->where('username', $value)->get();
+    }
+
     public function getFollowerAndFollowing()
     {
         return Auth::user()
@@ -31,10 +36,10 @@ class ProfileRepository extends BaseRepository implements ProfileRepositoryInter
             ->loadCount('follower', 'following');
     }
 
-    public function getIdFollowingPluckId($id = 'id')
+    public function getIdFollowingPluckId()
     {
         return Auth::user()->following
-            ->pluck($id)
+            ->pluck('id')
             ->toArray();
     }
     
