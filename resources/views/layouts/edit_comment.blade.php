@@ -7,7 +7,7 @@
     <a type="button" class="editComment"  data-id="{{ $comment->id }}"  value="{{ $comment->id }}">
         <i class="far fa-edit"></i>
     </a>
-    <div class="formEditComment{{ $comment->id }}" >
+    <div class="formEditComment{{ $comment->id }} form-edit-comment">
         <input type="text" class="form-control inputEditComment" id="edit{{ $comment->id }}" name="valueEditComment">
         <div class="actionEditPost">
             <button class="submitEditComment" data-token="{{ csrf_token() }}" value="{{ $comment->id }}">save</button>

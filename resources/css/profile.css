@@ -518,6 +518,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
     color: white;
     font-size:15px;
     padding:80px;
+    margin-top: 14px;
 }
 
 .show-post:hover {

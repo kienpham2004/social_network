@@ -72,7 +72,8 @@
 }
 
 .sugest-username {
-    font-size: 14px
+    font-size: 14px;
+    color: #262626;
 }
 
 .suggess {
@@ -218,5 +219,27 @@
 }
 
 .form-none {
+    display: none;
+}
+
+.span-follow {
+    color: #0095f6; 
+    font-size: 13px;
+}
+
+.username-suggess {
+    text-decoration: none !important;
+}
+
+.sugest-username:hover {
+    color: #0879fa;
+    text-decoration: none;
+}
+
+.text-suggess {
+    font-size: 15px;
+}
+
+.form-edit-comment {
     display: none;
 }

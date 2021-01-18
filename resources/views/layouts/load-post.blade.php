@@ -9,7 +9,7 @@
                 {{ route('home.profile') }}
             @endif
         " 
-            class="info info_flex">
+            class="info">
                 <div class="card-header p-3 header-post">
                     <div class="d-flex flex-row align-items-center">
                         <div class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center border border-danger post-profile-photo mr-3">
@@ -151,7 +151,7 @@
                                         <i class="far fa-edit"></i>
                                     </a>
                                 @endcan
-                                <div class="formEditComment{{ $item->id }}" >
+                                <div class="formEditComment{{ $item->id }} form-edit-comment">
                                     <input type="text" class="form-control inputEditComment" id="edit{{ $item->id }}" value="{{ $item->content }}" name="valueEditComment">
                                     <div class="actionEditPost" >
                                         <button class="submitEditComment" data-token="{{ csrf_token() }}" value="{{ $item->id }}" >{{ trans('timeline.save') }}</button>
@@ -162,10 +162,9 @@
                     @endforeach
                 </div>
             </div>
-
             <div class="position-relative comment-box">
                 <input type="text" class="form-control w-100 p-3 add_comment input-post{{ $post->id }}" id="commentValue{{ $post->id }}" placeholder="{{ trans('time_line.add_comment') }}" value="" name="comment" autofocus  >
-                <button class="btn btn-primary position-absolute btn-ig send-comment" type="submit" data-post-id="{{ $post->id }}">{{ trans('timeline.post') }}</button>
+                <button class="btn btn-primary position-absolute btn-ig send-comment-on-post send-comment{{ $post->id }}" type="submit" data-post-id="{{ $post->id }}">{{ trans('timeline.post') }}</button>
             </div>
         </div>
     </div>
