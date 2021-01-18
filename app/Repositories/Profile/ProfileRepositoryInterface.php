@@ -9,9 +9,11 @@ interface ProfileRepositoryInterface extends RepositoryInterface
 
    public function getUserByCondition($column, $value, $with, $withCount);
 
+   public function getUserByUsername($value);
+
    public function getFollowerAndFollowing();
 
-   public function getIdFollowingPluckId($id);
+   public function getIdFollowingPluckId();
 
    public function getListSuggess($user);  
 

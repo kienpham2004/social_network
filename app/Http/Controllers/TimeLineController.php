@@ -23,14 +23,14 @@ class TimeLineController extends Controller
 
     public function viewUser($username)
     {
-        $counts = $this->profileRepo->getUserByCondition('username', $username, ['follower', 'following']);
-        if (!$counts->count()) {
-                abort(404);
-        } else {
+        $counts = $this->profileRepo->getUserByUsername($username);
+        if ($counts) {
             $posts = $this->postRepo->getPostWithUserImageCommentLatest('user_id', $counts[0]->id);
             $checkFollow = $this->followRepo->checkFollow($counts[0]->id, Auth::user()->id);
             
             return view('view_user', compact('counts', 'posts', 'checkFollow'));
         }
-   }
+
+        return redirect()->route('home');
+    }
 }
