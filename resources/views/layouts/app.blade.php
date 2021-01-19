@@ -137,16 +137,16 @@
     
                             <li class="nav-item dropdown">
                                 <div class="dropdown" id="navbarDropdown">
-                                    <span>{{ Auth::user()->username }}</span>
+                                    <span dusk="change-language">{{ Auth::user()->username }}</span>
                                 </div>
                                 <div class="dropdown-content">
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('home.lang', ['vi']) }}">Tiếng Việt</a>
+                                            <a class="nav-link" dusk="vi" href="{{ route('home.lang', ['vi']) }}">Tiếng Việt</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('home.lang', ['en']) }}">English</a>
+                                            <a class="nav-link" dusk="en" href="{{ route('home.lang', ['en']) }}">English</a>
                                         </li>
                                         <button class="btn btn-link" type="submit">{{ trans('log_res.logout') }}</button>
                                     </form>
