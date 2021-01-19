@@ -1,4 +1,4 @@
-$(document).on("click", ".send-comment", function(){
+$(document).on("click", ".send-comment-on-post", function(){
     let postId= $(this).data('post-id');
     $("#commentValue" + postId).text('');
     let valueComment = $("#commentValue"+postId).val();
@@ -26,8 +26,8 @@ $(document).on("click", ".send-comment", function(){
                 $("#show-errors" + postId).text(error.errors.valueComment).css("color", "red");
             }
         }
-    });
-});
+    })
+})
 
 $(document).on("click", ".deleteComment", function(){
     let id = $(this).data("id");
@@ -48,8 +48,8 @@ $(document).on("click", ".deleteComment", function(){
             toastr.options.timeOut = 3000;
             $(".input-post").html("");
         },
-        error : function(){
-            alert('Not working!');
+        error : function(){	
+            alert('Not working!');	
         }
     });
 });
@@ -79,8 +79,8 @@ $(document).on("click", ".submitEditComment", function(){
             toastr.warning('Edit comment success', 'Edit comment');
             toastr.options.timeOut = 3000;
         },
-        error : function(){
-            alert('Not working!');
+        error : function(){	
+            alert('Not working!');	
         }
     });
 });

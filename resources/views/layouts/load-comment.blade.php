@@ -28,7 +28,7 @@
                             <i class="far fa-edit"></i>
                         </a>
                     @endcan
-                    <div class="form-none formEditComment{{ $item->id }}" >
+                    <div class="form-none formEditComment{{ $item->id }} form-edit-comment" >
                         <input type="text" class="form-control inputEditComment" id="edit{{ $item->id }}" value="{{ $item->content }}" name="valueEditComment" >
                         <div class="actionEditPost icon-right">
                             <button class="submitEditComment" data-token="{{ csrf_token() }}" value="{{ $item->id }}" >{{ trans('timeline.save') }}</button>

@@ -481,3 +481,24 @@ img {
 .action-user {
     line-height: 5px;
 }
+
+.view_user_when_search {
+    display: block; 
+    padding-left: 10px;
+}
+
+#show-user-search-navbar {
+    display:block; 
+    position:relative; 
+    width: auto; 
+    border: 0 !important; 
+    border-radius: none !important; 
+    padding: 0 !important; 
+    line-height: 25px;
+}
+
+.list-user {
+    display: flex; 
+    padding: 10px; 
+    border-bottom: 1px solid #fafafa;
+}

@@ -47,7 +47,7 @@
                     <div>
                         <div class="header">
                             <a href="{{ route('home.profile') }}"
-                                class="info info_flex">
+                                class="info">
                                 <div class=" p-3">
                                     <div class="d-flex flex-row align-items-center">
                                         <div class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center border border-danger post-profile-photo mr-3">
@@ -160,7 +160,7 @@
                                         <strong>
                                             <a href="
                                                 @if ($comment->user->username != Auth::user()->username)
-                                                    {{ route('view_user.viewUser', $comment->user->username) }}
+                                                    {{ route('wall.your_friend', $comment->user->username) }}
                                                 @else
                                                     {{ route('home.profile') }}
                                                 @endif">{{ $comment->user->username }}

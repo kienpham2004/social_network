@@ -9,7 +9,7 @@
                         {{ route('profile.index') }}
                     @endif
                     " 
-                    class="info info_flex">
+                    class="info">
                         <div class="card-header p-3 header-post">
                             <div class="d-flex flex-row align-items-center">
                                 <div class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center border border-danger post-profile-photo mr-3">
@@ -128,7 +128,7 @@
                         <input type="text" class="form-control w-100 p-3 add_comment input-post{{ $post->id }}" 
                             id="commentValue{{ $post->id }}" placeholder="{{ trans('timeline.add_comment') }}" 
                             value="" data-id={{ $post->id }} name="comment" autofocus  >
-                        <button class="btn btn-primary position-absolute btn-ig send-comment{{ $post->id }}" 
+                        <button class="btn btn-primary position-absolute btn-ig send-comment-on-post send-comment{{ $post->id }}" 
                             type="submit" data-post-id="{{ $post->id }}" disabled>{{ trans('timeline.post') }}</button>
                     </div>
                 </div>
@@ -137,3 +137,4 @@
     @endforeach
     <button type="button" class="btn btn-primary btn-loadmore" value="{{ $post->id }}" >{{ trans('timeline.load_more') }}</button>
 </div>
+
