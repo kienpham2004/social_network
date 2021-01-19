@@ -19,3 +19,4 @@ yarn-error.log
 /public/.bowerrc
 /public/avatar
 coverage/
+/tests/Http/Controller/FollowControllerTest.php

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Follow;
+use App\Models\Activity;
 use App\Repositories\Follow\FollowRepositoryInterface;
 
 class FollowController extends Controller
@@ -32,6 +33,18 @@ class FollowController extends Controller
 
             return response()->json($data);
         } else {
+
+            $user = Follow::with('friend')->where('follow_id', $request->id)->first();
+            // dd($user);
+            $activities = new Activity;
+            $activities->user_id = Auth::id();
+            $activities->action = config('create_data.follow');
+            $activities->notify = json_encode([
+                'message' => 'profile.action_follow_history',
+                'user_name' => $user->friend->username,  
+            ]);
+            
+            $follow->activities()->save($activities);
             $result = [
                 'user_id' => $follow->user_id,
                 'follow_id' => $follow->follow_id, 
