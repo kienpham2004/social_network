@@ -12,4 +12,9 @@ return [
     'activity_history' => 'Lịch sử hoạt động',
     'upload_avatart' => 'Tải ảnh lên',
     'follow' => 'Theo dõi',
+    'unfollow' => 'Bỏ theo dõi',
+    'action_comment_history' => 'Bạn đã comment một bài viết của ',
+    'action_follow_history' => 'Bạn đã theo dõi',
+    'action_like_history' => 'Bạn đã thích một bài viết của',
+    'activities' => 'Lịch sử hoạt động',
 ];

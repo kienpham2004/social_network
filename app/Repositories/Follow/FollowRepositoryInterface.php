@@ -8,4 +8,8 @@ interface FollowRepositoryInterface extends RepositoryInterface
     public function checkFollow($user_id, $id);
 
     public function findIdUser($id);
+
+    public function getFollower($id);
+
+    public function getUserRelationFriend($id);
 }

@@ -13,4 +13,8 @@ return [
     'upload_avatart' => 'Upload Avatar',
     'follow' => 'Follow',
     'unfollow' => 'Unfollow',
+    'action_comment_history' => 'You commented on post',
+    'action_follow_history' => 'You followed',
+    'action_like_history' => 'You liked post',
+    'activities' => 'Activity',
 ];

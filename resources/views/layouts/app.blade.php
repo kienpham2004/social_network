@@ -92,7 +92,7 @@
                                         </a>
                                     </li>
                                     <li class="list-inline-item ml-2 icon-navbar">
-                                        <a href="#" class="link-menu">
+                                        <a type="button" href="{{ route('activity.history') }}" class="link-menu" type="button" data-toggle="modal" data-target="#listhistory">
                                             <svg viewBox="0 0 16 16" class="bi bi-compass icon">
                                                 <path fill-rule="evenodd"
                                                     d="M8 15.016a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13zm0 1a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15z" />
@@ -146,6 +146,9 @@
                                     </li>
                                 </div>
                            </div>
+                            </div>
+                            &nbsp;
+                            &nbsp;
                             <li class="nav-item dropdown">
                                 &nbsp;
                                 &nbsp;

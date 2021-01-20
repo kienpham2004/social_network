@@ -48,7 +48,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->whereIn('user_id', $user)
             ->withCount('users', 'comments')
             ->orderBy('created_at', 'desc')
-            ->take(config('var_in_controller.take_record_3'))
+            ->limit(config('var_in_controller.take_record_3'))
             ->get();
     }
 
@@ -59,7 +59,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->where('id', '<' , $id)
             ->withCount('users', 'comments')
             ->orderBy('created_at', 'desc')
-            ->take(config('var_in_controller.take_record_3'))
+            ->limit(config('var_in_controller.take_record_3'))
             ->get();
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Story;
+use App\Repositories\Activity\ActivityRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Repositories\Profile\ProfileRepositoryInterface;
 use App\Repositories\Post\PostRepositoryInterface;
@@ -21,19 +22,21 @@ class HomeController extends Controller
      *
      * @return void
      */
-    protected $postRepo, $profileRepo, $likeRepo, $storyRepp;
+    protected $postRepo, $profileRepo, $likeRepo, $storyRepp, $activityRepo;
 
     public function __construct(
         ProfileRepositoryInterface $profileRepo, 
         PostRepositoryInterface $postRepo,
         LikeRepositoryInterface $likeRepo,
-        StoryRepositoryInterface $storyRepp
+        StoryRepositoryInterface $storyRepo,
+        ActivityRepositoryInterface $activityRepo
     ) {
         $this->middleware('checkstatus');
         $this->profileRepo = $profileRepo;
         $this->postRepo = $postRepo;
         $this->likeRepo = $likeRepo;
-        $this->storyRepp = $storyRepp;
+        $this->storyRepp = $storyRepo;
+        $this->activityRepo = $activityRepo;
     }
 
     public function index()
@@ -44,8 +47,9 @@ class HomeController extends Controller
         $likes = $this->likeRepo->selectLikePostId();
         $likeArr = $this->likeRepo->convertArrLike($likes);
         $stories = $this->storyRepp->getListStory();
+        $listHistory = $this->activityRepo->getActivity();
 
-        return view('time_line', compact('posts', 'suggessForYou', 'likeArr', 'stories'));
+        return view('time_line', compact('posts', 'suggessForYou', 'likeArr', 'stories', 'listHistory'));
     }
 
     public function loadPost(Request $request)
