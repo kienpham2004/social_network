@@ -23,6 +23,7 @@ Route::patch('admin/manager/edit-status/disabled/{id}', 'AdminController@changeS
 Route::patch('admin/manager/edit-status/active/{id}', 'AdminController@changeStatusActive')->name('change.status_active');
 
 Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'locale'], function () {
     Route::get('/home/{lang}', 'SwitchLanguage@setLocale')->name('home.lang');
@@ -45,3 +46,9 @@ Route::group(['middleware' => 'locale'], function () {
     Route::post('/home/load-post', 'HomeController@loadPost')->name('home.load_post');
     Route::post('/home/view-comment', 'HomeController@viewComment')->name('home.view_comment');
 });
+
+Route::get('/mail', 'ForgotPasswordController@sendMail');
+Route::get('/forgot-password', 'ForgotPasswordController@forgotPassword')->name('forgot.password');
+Route::patch('/get-email', 'ForgotPasswordController@getEmail')->name('get_email');
+Route::post('/confirm-otp/{email}', 'ForgotPasswordController@confirmOtp')->name('confirm_otp');
+Route::patch('/reset-password/{email}', 'ForgotPasswordController@ressetPassword')->name('reset_password');

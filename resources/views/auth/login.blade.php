@@ -44,7 +44,7 @@
                             <p>{{ trans('log_res.log_with_fb') }}</p>
                         </div>
                         <div class="forgot">
-                            <a href="#">{{ trans('log_res.forgot_pass') }}</a>
+                            <a href="{{ route('forgot.password') }}">{{ trans('log_res.forgot_pass') }}</a>
                         </div>
                     </div>
                 </div>

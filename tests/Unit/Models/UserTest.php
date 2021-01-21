@@ -42,6 +42,7 @@ class UserTest extends TestCase
             'fullname',
             'status',
             'avatar',
+            'OTP',
         ], $this->user->getFillable());
     }
 

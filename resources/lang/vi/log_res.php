@@ -18,4 +18,16 @@ return [
     'get_app' => 'Tải ứng dụng.',
     'enter_email' => 'Nhập tên email',
     'enter_username' => 'Nhập tên tài khoản',
+    'submit' => 'Xác nhận',
+    'type_otp' => 'Nhập mã OTP',
+    'email_confirm' => 'Xác nhận email:',
+    'sent_code_otp_to_email' => 'Mã OTP đã gửi về địa chỉ',
+    'confirm_otp' => 'Vui lòng xác nhận mã OTP đã gửi về địa chỉ',
+    'thank_you' => 'Cảm ơn!!!',
+    'confirm_otp_sent_to_email' => 'Vui lòng xác nhận mã OTP đã gửi về địa chỉ:',
+    'otp_code' => 'Mã OTP:',
+    'otp_not_found' => 'Mã OTP không đúng!!!',
+    'update_fail' => 'Cập nhật không thành công',
+    'otp_sent_from_instagram' => 'Mã OTP gửi từ Instagram.',
+    'otp' => 'OTP:'
 ];
