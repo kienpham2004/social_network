@@ -4,6 +4,7 @@ namespace App\Repositories\Profile;
 use App\Repositories\BaseRepository;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileRepository extends BaseRepository implements ProfileRepositoryInterface
 {
@@ -55,5 +56,43 @@ class ProfileRepository extends BaseRepository implements ProfileRepositoryInter
     public function getValueSearch($column, $value)
     {
         return User::where($column, 'like', '%' . $value . '%')->get();
+    }
+
+    public function getUserByEmail($email)
+    {
+        return User::where('email', $email)->get();
+    }
+
+    public function getUserFirstByEmail($email)
+    {
+        $user = User::where('email', $email)->first();
+
+        return $user;
+    }
+
+    public function updateOtpWhenFindEmail($email)
+    {
+        $user = User::where('email', $email)->first();
+
+        return $user->update([
+            'OTP' => rand(100000, 999999),
+        ]);
+    }
+
+    public function getOTPUser($email)
+    {
+        $user = User::where('email', $email)->first();
+
+        return $user->OTP;
+    }
+
+    public function updatePasswordAndOtp($email, $password)
+    {
+        $user = User::where('email', $email)->first();
+
+        return $user->update([
+            'password' => Hash::make($password),
+            'OTP' => null,
+        ]);
     }
 }

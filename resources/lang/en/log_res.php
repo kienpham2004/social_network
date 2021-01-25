@@ -19,4 +19,17 @@ return [
     'enter_email' => 'Enter your email...',
     'enter_username' => 'Enter your username..',
     'title' => 'Instagram',
+    'submit' => 'Submit',
+    'type_otp' => 'Type OTP',
+    'email_confirm' => 'Email Confirm:',
+    'sent_code_otp_to_email' => 'OTP code sent to email',
+    'confirm_otp' => 'Please enter the OTP to confirm:',
+    'thank_you' => 'Thank You!!!',
+    
+    'confirm_otp_sent_to_email' => 'Please confirm that the OTP has been sent to your address',
+    'otp_code' => 'OTP Code:',
+    'opt_not_found' => 'OTP not found!!!',
+    'update_fail' => 'Update Fail',
+    'otp_sent_from_instagram' => 'OTP sent from Instagram.',
+    'otp' => 'OTP:'
 ];

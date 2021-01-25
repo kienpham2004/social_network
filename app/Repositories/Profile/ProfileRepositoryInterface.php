@@ -18,4 +18,14 @@ interface ProfileRepositoryInterface extends RepositoryInterface
    public function getListSuggess($user);  
 
    public function getValueSearch($column, $value);
+
+   public function getUserByEmail($email);
+
+   public function getUserFirstByEmail($email);
+
+   public function updateOtpWhenFindEmail($email);
+
+   public function getOTPUser($email);
+
+   public function updatePasswordAndOtp($email, $password);
 }
