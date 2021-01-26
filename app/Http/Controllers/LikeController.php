@@ -3,19 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Activity;
-use App\Models\Like;
 use App\Repositories\Like\LikeRepositoryInterface;
+use App\Models\User;
+use App\Notifications\LikeNotication;
+use App\Repositories\Profile\ProfileRepositoryInterface;
 
 class LikeController extends Controller
 {
-    protected $likeRepo;
+    protected $likeRepo, $profileRepo;
 
-    public function __construct(LikeRepositoryInterface $likeRepo)
-    {
+    public function __construct(
+        LikeRepositoryInterface $likeRepo,
+        ProfileRepositoryInterface $profileRepo
+    ) {
         $this->likeRepo = $likeRepo;
+        $this->profileRepo = $profileRepo;
     }
 
     public function like(Request $request)
@@ -25,22 +28,50 @@ class LikeController extends Controller
             'post_id' => $request->id,
         ];
         $like = $this->likeRepo->create($data);
-        $result = [
-            'user_id' => $like->user_id,
-            'post_id' => $like->post_id,
-        ];
+        if (empty($like)) {
+            $data = [
+                'status' => config('id.status_fail_404'),
+                'message' => trans('mes.fail'),
+            ];
 
-        return response()->json($result);
+            return response()->json($data);
+        } else {
+            $result = [
+                'user_id' => $like->user_id,
+                'post_id' => $like->post_id,
+                'id_user_noti' => $request->user_id,
+            ];
+            $notificationsOfUser = $this->profileRepo->findUserByIdGetFromPost($request->user_id);
+            $noti = [
+                'user_name' => Auth::user()->username,
+                'action' => 'mes.liked',
+                'for_you' => 'mes.your_post',
+            ];
+
+            $notificationsOfUser->notify(new LikeNotication($noti));
+    
+            return response()->json($result);
+        }
     }
 
-    public function unlike($id)
+    public function unlike(Request $request, $id)
     {
         $like = $this->likeRepo->findIdPost($id);
-        $likeDelete = $this->likeRepo->delete($like->first()->id);
-        $result = [
-            'post_id' => $id,
-        ];
+        if (empty($like)) {
+            $data = [
+                'status' => config('id.status_fail_404'),
+                'message' => trans('mes.fail'),
+            ];
 
-        return response()->json($result);
+            return response()->json($data);
+        } else {
+            $likeDelete = $this->likeRepo->delete($like->first()->id);
+            $result = [
+                'post_id' => $id,
+                'id_user_noti' => $request->user_id,
+            ];
+    
+            return response()->json($result);
+        }
     }
 }

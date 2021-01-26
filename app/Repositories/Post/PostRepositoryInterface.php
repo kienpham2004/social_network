@@ -16,4 +16,6 @@ interface PostRepositoryInterface extends RepositoryInterface
    public function getPostLimit($user);
 
    public function getPostLoadMore($user, $id);
+
+   public function findPostWithUser($id);
 }

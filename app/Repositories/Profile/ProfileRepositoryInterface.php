@@ -28,4 +28,6 @@ interface ProfileRepositoryInterface extends RepositoryInterface
    public function getOTPUser($email);
 
    public function updatePasswordAndOtp($email, $password);
+
+   public function findUserByIdGetFromPost($id);
 }

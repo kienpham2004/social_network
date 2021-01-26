@@ -8,5 +8,6 @@ return [
     'count_image_1' => 1,
     'count_comment_1' => 1,
     'count_comment_2' => 2,
-    'check_followed' => 1.
+    'check_followed' => 1,
+    'count_notification' => 0,
 ];

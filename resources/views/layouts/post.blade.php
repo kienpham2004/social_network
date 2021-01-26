@@ -53,7 +53,7 @@
                         <ul class="list-inline d-flex flex-row align-items-center m-0">
                             <li class="list-inline-item">                 
                                 @if (in_array($post->id, $likeArr))
-                                    <button class="btn p-0 button-unlike" data-count="{{ $post->users_count }}" data-token="{{ csrf_token() }}" 
+                                    <button class="btn p-0 button-unlike" data-user-id="{{ $post->user->id }}" data-count="{{ $post->users_count }}" data-token="{{ csrf_token() }}" 
                                             id="unlike{{ $post->id }}" data-id="{{ $post->id }}">
                                         <svg class="icon" viewBox="0 0 16 16"
                                             class="fas fa-heart" fill="currentColor">
@@ -62,7 +62,7 @@
                                         </svg>
                                     </button>
                                 @else
-                                    <button class="btn p-0 button-like" data-count="{{ $post->users_count }}" data-token="{{ csrf_token() }}" 
+                                    <button class="btn p-0 button-like" data-user-id="{{ $post->user->id }}" data-count="{{ $post->users_count }}" data-token="{{ csrf_token() }}" 
                                             id="like{{ $post->id }}" data-id="{{ $post->id }}">
                                         <svg class="icon" viewBox="0 0 16 16"
                                             class="far fa-heart icon-like" fill="currentColor">
@@ -137,4 +137,3 @@
     @endforeach
     <button type="button" class="btn btn-primary btn-loadmore" value="{{ $post->id }}" >{{ trans('timeline.load_more') }}</button>
 </div>
-

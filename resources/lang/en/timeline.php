@@ -12,4 +12,5 @@ return [
     'load_more' => 'Load More',
     'view' => 'View',
     'comments' => 'comments',
+    'notification' => 'Notification',
 ];

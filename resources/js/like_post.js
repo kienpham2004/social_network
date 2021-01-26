@@ -2,18 +2,20 @@ $(document).on('click', '.button-like' , function(){
     let idPost = $(this).data("id");
     let token = $('meta[name="csrf-token"]').attr('content');
     let countLike = $(this).data('count');
+    let user_id = $(this).data('user-id');
     $.ajax({
         url : "/like/post",
         type : "post",
         data : {
             '_token' : token,
             'id' : idPost,
+            'user_id' : user_id,
         },
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
         },
         success : function(result){
-            html = `<button class="btn p-0 button-unlike" data-token="{{ csrf_token() }}" id="unlike${result.post_id}" data-id="${result.post_id}">
+            html = `<button class="btn p-0 button-unlike" data-user-id="${ result.id_user_noti }" data-token="{{ csrf_token() }}" id="unlike${ result.post_id }" data-id="${ result.post_id }">
                         <svg class="icon" viewBox="0 0 16 16"
                             class="fas fa-heart" fill="currentColor">
                             <path fill-rule="evenodd"
@@ -34,18 +36,20 @@ $(document).on('click', '.button-unlike' , function(){
     let idPost = $(this).data("id");
     let token = $('meta[name="csrf-token"]').attr('content');
     let countLike = $(this).data('count');
+    let user_id = $(this).data('user-id');
     $.ajax({
         url : "/unlike/post/" + idPost,
         type : "delete",
         data : {
             'id' : idPost,
             '_token' : token,
+            'user_id' : user_id,
         },
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
         },
         success : function(result){
-            html = `<button class="btn p-0 button-like" data-token="{{ csrf_token() }}" id="like${result.post_id}" data-id="${result.post_id}">
+            html = `<button class="btn p-0 button-like" data-user-id="${ result.id_user_noti }" data-token="{{ csrf_token() }}" id="like${result.post_id}" data-id="${result.post_id}">
                         <svg class="icon" viewBox="0 0 16 16"
                             class="far fa-heart icon-like" fill="currentColor">
                             <path fill-rule="evenodd"

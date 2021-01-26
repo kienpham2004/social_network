@@ -12,4 +12,5 @@ return [
     'load_more' => 'Tải thêm',
     'view' => 'Xem',
     'comments' => 'bình luận',
+    'notification' => 'Thông báo',
 ];
