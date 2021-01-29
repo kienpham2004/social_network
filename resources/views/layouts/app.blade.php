@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     @yield('css')
-    @toastr_css
+   
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
@@ -26,7 +26,6 @@
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bower_components/font-awesome/css/all.min.css') }}" rel="stylesheet" 
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" 
         crossorigin="anonymous">
     <script src="{{ asset('js/search.js') }}"></script>
     <script src="{{ asset('js/follow.js') }}"></script>
@@ -38,6 +37,8 @@
     <script src="{{ asset('bower_components/font-awesome/js/fontawesome.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/all.js') }}"></script>
     <script src="{{ asset('js/comment.js') }}"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    @toastr_css
 </head>
 <body>
     <div id="app">
@@ -122,29 +123,36 @@
                                                     d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
                                             </svg>
                                         </a>
+                                        {{-- -------------------------------------------------- --}}
                                         @if (count(Auth::user()->unreadNotifications) > config('check_var_on_view.count_notification'))
-                                            <span class="badge badge-danger span-count-noti">{{ count(Auth::user()->unreadNotifications) }}</span>
+                                            <span id="count-noti" class="badge badge-danger span-count-noti" data-count="{{ count(Auth::user()->unreadNotifications) }}">{{ count(Auth::user()->unreadNotifications) }}</span>
                                         @endif
                                         <div class="dropdown-content">
-                                            @foreach (Auth::user()->notifications as $notification)                            
-                                                @if ($notification->read_at == null)
-                                                    <a class="read-noti" href="{{ route('read.noti', $notification->id) }}">
-                                                        <div class="notification-unread">
-                                                            <span>{{ $notification->data['user_name'] }}</span>
-                                                            <span>{{ trans($notification->data['action']) }}</span>
-                                                            <span>{{ trans($notification->data['for_you']) }}</span>
-                                                        </div>
-                                                    </a>
-                                                @else
-                                                    <div class="notification-read">
-                                                        <span>{{ $notification->data['user_name'] }}</span>
-                                                        <span>{{ trans($notification->data['action']) }}</span>
-                                                        <span>{{ trans($notification->data['for_you']) }}</span>
+                                            
+                                                @foreach (Auth::user()->notifications as $notification)   
+                                                    <div class="notification-list{{ $loop->index }}">                         
+                                                        @if ($notification->read_at == null)
+                                                            <a class="read-noti" href="{{ route('read.noti', $notification->id) }}">
+                                                                <div class="notification-unread">
+                                                                    <span style="display: none;">{{ $notification->id }}</span>
+                                                                    <span>{{ $notification->data['user_name'] }}</span>
+                                                                    <span>{{ trans($notification->data['action']) }}</span>
+                                                                    <span>{{ trans($notification->data['for_you']) }}</span>
+                                                                </div>
+                                                            </a>
+                                                        @else
+                                                            <div class="notification-read">
+                                                                <span>{{ $notification->data['user_name'] }}</span>
+                                                                <span>{{ trans($notification->data['action']) }}</span>
+                                                                <span>{{ trans($notification->data['for_you']) }}</span>
+                                                            </div>
+                                                        @endif
+                                                        <hr>
                                                     </div>
-                                                @endif
-                                                <hr>
-                                            @endforeach
+                                                @endforeach
+                                            
                                         </div>
+                                        {{-- --------------------------------------------------------- --}}
                                     </li>
                                     <li class="list-inline-item ml-2 align-middle">
                                         <a href="{{ route('profile.index') }}" class="link-menu">
@@ -156,7 +164,6 @@
                                     </li>
                                 </div>
                            </div>
-    
                             <li class="nav-item dropdown">
                                 <div class="dropdown" id="navbarDropdown">
                                     <span dusk="change-language">{{ Auth::user()->username }}</span>
@@ -184,6 +191,34 @@
             @yield('profile')
         </main>
     </div>
+
+    <script type="text/javascript">	
+        var notificationsCount = $('#count-noti').data('count');
+        var notifications = $('.notification-list').find('.notification-list');
+        Pusher.logToConsole = true;
+        var pusher = new Pusher('3ffdd80b318a32b5d843', {
+            cluster: 'ap1',
+            encrypted: true
+        });
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('App\\Events\\LikeEvent', function(data) {
+            var existingNotifications = notifications.html();
+            var notificationsCountAfter = $('#count-noti').text(parseInt(notificationsCount) + 1);
+            notificationsCount += 1;
+            $('.span-count-noti').attr('data-count', notificationsCount);
+            toastr.success(data.data['user_name'] + data.data['action'] + data.data['for_you'], 'Success');
+            var newNotication = `
+                <a class="read-noti" href="{{ route('read.noti', $notification->id) }}">
+                    <div class="notification-unread">
+                        <span>${ data.data['user_name'] }</span>
+                        <span>${ data.data['action'] }</span>
+                        <span>${ data.data['for_you'] }</span>  
+                    </div>
+                </a>
+            `;
+            $('.notification-list0').prepend(newNotication);
+        });
+    </script>
 </body>
     @jquery
     @toastr_js

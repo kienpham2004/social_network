@@ -13,6 +13,7 @@ use App\Repositories\Activity\ActivityRepositoryInterface;
 use App\Repositories\Comment\CommentRepositoryInterface;
 use App\Repositories\Post\PostRepositoryInterface;
 use App\Repositories\Profile\ProfileRepositoryInterface;
+use App\Events\LikeEvent;
 
 class CommentController extends Controller
 {
@@ -57,6 +58,7 @@ class CommentController extends Controller
             'for_you' => 'mes.your_post',
         ];
         $notificationsOfUser->notify(new CommentNotification($noti));
+        event(new LikeEvent($noti));
 
         return view('layouts.item_comment', compact('comment'));
     }

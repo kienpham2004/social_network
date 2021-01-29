@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LikeEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\Like\LikeRepositoryInterface;
@@ -49,7 +50,8 @@ class LikeController extends Controller
             ];
 
             $notificationsOfUser->notify(new LikeNotication($noti));
-    
+            event(new LikeEvent($noti));
+            
             return response()->json($result);
         }
     }
