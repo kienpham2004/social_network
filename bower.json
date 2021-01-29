@@ -19,6 +19,7 @@
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
     "font-awesome": "^5.15.1",
-    "css": "https://fonts.googleapis.com/css?family=Nunito"
+    "css": "https://fonts.googleapis.com/css?family=Nunito",
+    "pusher-js": "pusher#^7.0.3"
   }
 }

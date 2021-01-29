@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LikeEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\Like\LikeRepositoryInterface;
 use App\Models\User;
 use App\Notifications\LikeNotication;
 use App\Repositories\Profile\ProfileRepositoryInterface;
+use App\Events\ActionRealtimeEvent;
 
 class LikeController extends Controller
 {
@@ -43,13 +45,15 @@ class LikeController extends Controller
             ];
             $notificationsOfUser = $this->profileRepo->findUserByIdGetFromPost($request->user_id);
             $noti = [
+                'usernameOfUser' => $notificationsOfUser->id,
                 'user_name' => Auth::user()->username,
                 'action' => 'mes.liked',
                 'for_you' => 'mes.your_post',
+                'id_user_noti' => $request->user_id,
             ];
-
             $notificationsOfUser->notify(new LikeNotication($noti));
-    
+            event(new ActionRealtimeEvent(array_merge($noti, ['id' => $notificationsOfUser->unreadNotifications[config('array.parameter_value_equals_0')]->id])));
+
             return response()->json($result);
         }
     }
