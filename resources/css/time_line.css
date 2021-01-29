@@ -243,3 +243,62 @@
 .form-edit-comment {
     display: none;
 }
+
+.notification-unread {
+    line-height: 25px; 
+    background-color: darkgray; 
+    margin-top: 5px; 
+    color: black; 
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+}
+
+.read-noti:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.notification-read {
+    line-height: 25px; 
+    background-color: whitesmoke; 
+    margin-top: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.notification-read:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.notication-span {
+    position: relative;
+}
+
+.span-count-noti {
+    position: absolute;
+    right: -5px;
+    bottom: 15px;
+    color: black;
+}
+
+.notication-span {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: -20px;
+    background-color: #f9f9f9;
+    width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.notication-span:hover .dropdown-content {
+    display: block;
+}

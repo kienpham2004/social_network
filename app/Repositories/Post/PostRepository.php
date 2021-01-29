@@ -60,4 +60,9 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->take(config('var_in_controller.take_record_3'))
             ->get();
     }
+
+    public function findPostWithUser($id)
+    {
+        return Post::with('user')->findOrFail($id);
+    }
 }

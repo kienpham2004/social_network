@@ -33,6 +33,14 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Role\RoleRepositoryInterface::class,
             \App\Repositories\Role\RoleRepository::class
         );
+        $this->app->singleton(
+            \App\Repositories\Comment\CommentRepositoryInterface::class,
+            \App\Repositories\Comment\CommentRepository::class
+        );
+        $this->app->singleton(
+            \App\Repositories\Activity\ActivityRepositoryInterface::class,
+            \App\Repositories\Activity\ActivityRepository::class
+        );
     }
 
     /**

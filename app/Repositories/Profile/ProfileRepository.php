@@ -95,4 +95,9 @@ class ProfileRepository extends BaseRepository implements ProfileRepositoryInter
             'OTP' => null,
         ]);
     }
+
+    public function findUserByIdGetFromPost($id)
+    {
+        return User::findOrFail($id);
+    }
 }

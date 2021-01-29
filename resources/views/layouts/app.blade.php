@@ -25,8 +25,7 @@
     <script src="{{ asset('bower_components/jquery/dist/jquery.slim.min.js') }}"></script>
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('bower_components/font-awesome/css/fontawesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('bower_components/font-awesome/css/all.css') }}" rel="stylesheet" 
+    <link href="{{ asset('bower_components/font-awesome/css/all.min.css') }}" rel="stylesheet" 
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" 
         crossorigin="anonymous">
     <script src="{{ asset('js/search.js') }}"></script>
@@ -115,14 +114,37 @@
                                             </svg>
                                         </a>
                                     </li>
-                                    <li class="list-inline-item ml-2 icon-navbar">
-                                        <a href="#" class="link-menu">
+                                    <li class="list-inline-item ml-2 icon-navbar notication-span">
+                                        <a href="#" class="link-menu" type="button" data-toggle="modal" data-target="#myModal">
                                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-heart"
                                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd"
                                                     d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
                                             </svg>
                                         </a>
+                                        @if (count(Auth::user()->unreadNotifications) > config('check_var_on_view.count_notification'))
+                                            <span class="badge badge-danger span-count-noti">{{ count(Auth::user()->unreadNotifications) }}</span>
+                                        @endif
+                                        <div class="dropdown-content">
+                                            @foreach (Auth::user()->notifications as $notification)                            
+                                                @if ($notification->read_at == null)
+                                                    <a class="read-noti" href="{{ route('read.noti', $notification->id) }}">
+                                                        <div class="notification-unread">
+                                                            <span>{{ $notification->data['user_name'] }}</span>
+                                                            <span>{{ trans($notification->data['action']) }}</span>
+                                                            <span>{{ trans($notification->data['for_you']) }}</span>
+                                                        </div>
+                                                    </a>
+                                                @else
+                                                    <div class="notification-read">
+                                                        <span>{{ $notification->data['user_name'] }}</span>
+                                                        <span>{{ trans($notification->data['action']) }}</span>
+                                                        <span>{{ trans($notification->data['for_you']) }}</span>
+                                                    </div>
+                                                @endif
+                                                <hr>
+                                            @endforeach
+                                        </div>
                                     </li>
                                     <li class="list-inline-item ml-2 align-middle">
                                         <a href="{{ route('profile.index') }}" class="link-menu">
