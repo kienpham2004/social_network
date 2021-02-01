@@ -13,4 +13,8 @@ return [
     'view' => 'View',
     'comments' => 'comments',
     'notification' => 'Notification',
+    'add_story' => 'Add Story',
+    'status' => 'Status',
+    'image' => 'Image',
+    'post' => 'Post',
 ];

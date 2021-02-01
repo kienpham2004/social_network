@@ -13,4 +13,8 @@ return [
     'view' => 'Xem',
     'comments' => 'bình luận',
     'notification' => 'Thông báo',
+    'add_story' => 'Thêm trạng thái',
+    'status' => 'Trạng thái',
+    'image' => 'Ảnh',
+    'post' => 'Đăng',
 ];

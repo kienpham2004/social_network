@@ -41,6 +41,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Activity\ActivityRepositoryInterface::class,
             \App\Repositories\Activity\ActivityRepository::class
         );
+        $this->app->singleton(
+            \App\Repositories\Story\StoryRepositoryInterface::class,
+            \App\Repositories\Story\StoryRepository::class
+        );
     }
 
     /**

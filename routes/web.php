@@ -46,6 +46,7 @@ Route::group(['middleware' => 'locale'], function () {
     Route::post('/home/load-post', 'HomeController@loadPost')->name('home.load_post');
     Route::post('/home/view-comment', 'HomeController@viewComment')->name('home.view_comment');
     Route::get('/notification/{id?}', 'NotificationController@maskAsRead')->name('read.noti');
+    Route::post('/create-story', 'ProfileController@createStory')->name('create.story');
 });
 
 Route::get('/mail', 'ForgotPasswordController@sendMail');

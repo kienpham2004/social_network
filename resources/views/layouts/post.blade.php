@@ -1,4 +1,5 @@
 <div class="col-8" id="loadPost">
+    @include('layouts.story')
     @foreach ($posts as $post) 
         <div class="d-flex flex-column mt-4 mb-4 post_user">
             <div class="card">
