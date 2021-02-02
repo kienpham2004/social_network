@@ -13,6 +13,8 @@ use App\Repositories\Activity\ActivityRepositoryInterface;
 use App\Repositories\Comment\CommentRepositoryInterface;
 use App\Repositories\Post\PostRepositoryInterface;
 use App\Repositories\Profile\ProfileRepositoryInterface;
+use App\Events\LikeEvent;
+use App\Events\ActionRealtimeEvent;
 
 class CommentController extends Controller
 {
@@ -52,11 +54,15 @@ class CommentController extends Controller
 
         $notificationsOfUser = $this->profileRepo->findUserByIdGetFromPost($post->user->id);
         $noti = [
+            'usernameOfUser' => $notificationsOfUser->id,
             'user_name' => Auth::user()->username,
             'action' => 'mes.commented',
             'for_you' => 'mes.your_post',
+            'id_user_noti' => $post->user->id,
         ];
         $notificationsOfUser->notify(new CommentNotification($noti));
+        broadcast(new ActionRealtimeEvent(array_merge($noti, 
+            ['id' => $notificationsOfUser->unreadNotifications[0]->id])));
 
         return view('layouts.item_comment', compact('comment'));
     }

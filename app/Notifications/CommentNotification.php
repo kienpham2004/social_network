@@ -42,6 +42,7 @@ class CommentNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
+            'usernameOfUser' => $this->data['usernameOfUser'],
             'user_name' => $this->data['user_name'],
             'action' => $this->data['action'],
             'for_you' => $this->data['for_you'],

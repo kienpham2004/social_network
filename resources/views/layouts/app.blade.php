@@ -4,21 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset(config('img.img_logo')) }}">
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ trans('log_res.title') }}</title>
-
-    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    {{ Html::script('messages.js') }}
     @yield('css')
-    @toastr_css
-    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
@@ -26,7 +18,6 @@
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bower_components/font-awesome/css/all.min.css') }}" rel="stylesheet" 
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" 
         crossorigin="anonymous">
     <script src="{{ asset('js/search.js') }}"></script>
     <script src="{{ asset('js/follow.js') }}"></script>
@@ -38,6 +29,8 @@
     <script src="{{ asset('bower_components/font-awesome/js/fontawesome.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/all.js') }}"></script>
     <script src="{{ asset('js/comment.js') }}"></script>
+    <script src="{{ asset('bower_components/pusher-js/dist/web/pusher.min.js') }}"></script>
+    @toastr_css
 </head>
 <body>
     <div id="app">
@@ -123,26 +116,30 @@
                                             </svg>
                                         </a>
                                         @if (count(Auth::user()->unreadNotifications) > config('check_var_on_view.count_notification'))
-                                            <span class="badge badge-danger span-count-noti">{{ count(Auth::user()->unreadNotifications) }}</span>
+                                            <span id="count-noti" class="badge badge-danger span-count-noti" data-count="{{ count(Auth::user()->unreadNotifications) }}">{{ count(Auth::user()->unreadNotifications) }}</span>
                                         @endif
                                         <div class="dropdown-content">
-                                            @foreach (Auth::user()->notifications as $notification)                            
-                                                @if ($notification->read_at == null)
-                                                    <a class="read-noti" href="{{ route('read.noti', $notification->id) }}">
-                                                        <div class="notification-unread">
+                                            @foreach (Auth::user()->notifications as $notification)
+                                                <input id="csrf" type="hidden" name="" value="{{ csrf_token() }}">   
+                                                <input id="id_user" type="hidden" name="" value="{{ Auth::user()->id }}">
+                                                <div class="notification-list{{ $loop->index }}">                         
+                                                    @if ($notification->read_at == null)
+                                                        <a class="read-noti" href="{{ route('read.noti', $notification->id) }}">
+                                                            <div class="notification-unread">
+                                                                <span>{{ $notification->data['user_name'] }}</span>
+                                                                <span>{{ trans($notification->data['action']) }}</span>
+                                                                <span>{{ trans($notification->data['for_you']) }}</span>
+                                                            </div>
+                                                        </a>
+                                                    @else
+                                                        <div class="notification-read">
                                                             <span>{{ $notification->data['user_name'] }}</span>
                                                             <span>{{ trans($notification->data['action']) }}</span>
                                                             <span>{{ trans($notification->data['for_you']) }}</span>
                                                         </div>
-                                                    </a>
-                                                @else
-                                                    <div class="notification-read">
-                                                        <span>{{ $notification->data['user_name'] }}</span>
-                                                        <span>{{ trans($notification->data['action']) }}</span>
-                                                        <span>{{ trans($notification->data['for_you']) }}</span>
-                                                    </div>
-                                                @endif
-                                                <hr>
+                                                    @endif
+                                                    <hr>
+                                                </div>
                                             @endforeach
                                         </div>
                                     </li>
@@ -156,7 +153,6 @@
                                     </li>
                                 </div>
                            </div>
-    
                             <li class="nav-item dropdown">
                                 <div class="dropdown" id="navbarDropdown">
                                     <span dusk="change-language">{{ Auth::user()->username }}</span>
@@ -184,6 +180,7 @@
             @yield('profile')
         </main>
     </div>
+    @include('layouts.accesspusher')
 </body>
     @jquery
     @toastr_js

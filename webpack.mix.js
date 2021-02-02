@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -27,3 +28,11 @@ mix.js('resources/js/profile.js', 'public/js/profile.js')
     .js('resources/js/paginate.js', 'public/js/paginate.js')
     .js('resources/js/admin-block.js', 'public/js/admin-block.js')
     .js('resources/js/follow.js', 'public/js/follow.js');
+mix.webpackConfig({
+    plugins : [
+        new WebpackShellPlugin({
+            onBuildStart : ['php artisan lang:js --quiet'], 
+            onBuildEnd : [],
+        })
+    ]
+});
