@@ -302,3 +302,25 @@
 .notication-span:hover .dropdown-content {
     display: block;
 }
+
+.username-story {
+    font-size: 10px;
+}
+
+.list-story-in-timeline {
+    overflow: auto;
+    max-width: 500px;
+    display: flex;
+    flex-direction: row;
+}
+
+.avatar-user-in-list-story {
+    width: 90px;
+    height: 90px;
+}
+
+.btn-submit-story {
+    background-color: cornflowerblue;
+    color: white;
+    float: right;
+}

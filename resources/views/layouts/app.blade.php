@@ -9,15 +9,15 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    {{ Html::script('messages.js') }}
-    @yield('css')
+    @toastr_css
+    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
     <script src="{{ asset('bower_components/jquery/dist/jquery.slim.min.js') }}"></script>
     <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('bower_components/font-awesome/css/all.min.css') }}" rel="stylesheet" 
+    <link href="{{ asset('bower_components/font-awesome/css/all.min.css') }}" rel="stylesheet"
         crossorigin="anonymous">
     <script src="{{ asset('js/search.js') }}"></script>
     <script src="{{ asset('js/follow.js') }}"></script>
@@ -29,8 +29,7 @@
     <script src="{{ asset('bower_components/font-awesome/js/fontawesome.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/all.js') }}"></script>
     <script src="{{ asset('js/comment.js') }}"></script>
-    <script src="{{ asset('bower_components/pusher-js/dist/web/pusher.min.js') }}"></script>
-    @toastr_css
+    @yield('css')
 </head>
 <body>
     <div id="app">

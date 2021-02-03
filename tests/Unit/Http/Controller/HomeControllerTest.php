@@ -10,10 +10,11 @@ use App\Http\Controllers\HomeController;
 use App\Repositories\Profile\ProfileRepositoryInterface;
 use App\Repositories\Post\PostRepositoryInterface;
 use App\Repositories\Like\LikeRepositoryInterface;
+use App\Repositories\Story\StoryRepositoryInterface;
 
 class HomeControllerTest extends TestCase
 {
-    protected $profileMock, $postMock, $likeMock, $homeController;
+    protected $profileMock, $postMock, $likeMock, $homeController, $storyMock;
 
     public function setUp() : void
     {
@@ -21,7 +22,8 @@ class HomeControllerTest extends TestCase
         $this->profileMock = Mockery::mock(ProfileRepositoryInterface::class)->makePartial();
         $this->postMock = Mockery::mock(PostRepositoryInterface::class)->makePartial();
         $this->likeMock = Mockery::mock(LikeRepositoryInterface::class)->makePartial();
-        $this->homeController = new HomeController($this->profileMock, $this->postMock, $this->likeMock);
+        $this->storyMock = Mockery::mock(StoryRepositoryInterface::class)->makePartial();
+        $this->homeController = new HomeController($this->profileMock, $this->postMock, $this->likeMock, $this->storyMock);
     }
 
     public function tearDown() : void
@@ -38,11 +40,13 @@ class HomeControllerTest extends TestCase
         $this->postMock->shouldReceive('getPostLimit')->with('dhasjd')->andReturn(true);
         $this->likeMock->shouldReceive('selectLikePostId')->andReturn(true);
         $this->likeMock->shouldReceive('convertArrLike')->with('jhabshd')->andReturn(true);
+        $this->storyMock->shouldReceive('getListStory')->andReturn(true);
         $result = $this->homeController->index();
         $this->assertEquals('time_line', $result->getName());
         $this->assertArrayHasKey('posts', $result->getData());
         $this->assertArrayHasKey('suggessForYou', $result->getData());
         $this->assertArrayHasKey('likeArr', $result->getData());
+        $this->assertArrayHasKey('stories', $result->getData());
     }
 
     public function test_loadpost_method()

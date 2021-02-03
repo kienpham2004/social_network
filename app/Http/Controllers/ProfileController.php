@@ -5,28 +5,34 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UploadAvatarRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostStatusRequest;
+use App\Http\Requests\StoryRequest;
 use App\Models\Image;
+use App\Models\Story;
 use App\Repositories\Follow\FollowRepositoryInterface;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Repositories\Like\LikeRepositoryInterface;
 use App\Repositories\Profile\ProfileRepositoryInterface;
 use App\Repositories\Post\PostRepositoryInterface;
+use App\Models\User;
+use App\Repositories\Story\StoryRepositoryInterface;
 
 class ProfileController extends Controller
 {
-    protected $profileRepo, $postRepo, $likeRepo, $followRepo;
+    protected $profileRepo, $postRepo, $likeRepo, $followRepo, $storyRepo;
 
     public function __construct(
         ProfileRepositoryInterface $profileRepo, 
         PostRepositoryInterface $postRepo,
         LikeRepositoryInterface $likeRepo,
-        FollowRepositoryInterface $followRepo
+        FollowRepositoryInterface $followRepo,
+        StoryRepositoryInterface $storyRepo
     ) {
         $this->profileRepo = $profileRepo;
         $this->postRepo = $postRepo;
         $this->likeRepo = $likeRepo;
         $this->followRepo = $followRepo;
+        $this->storyRepo = $storyRepo;
     }
 
     public function index()
@@ -130,5 +136,27 @@ class ProfileController extends Controller
             }
         }
         }
+    }
+
+    public function createStory(Request $request)
+    {
+        if ($request->file('imageStory')) {
+            $imagePath = $request->file('imageStory');
+            $imageName = rand() . "." . $imagePath->getClientOriginalExtension();
+            $path = $request->file('imageStory')->move(public_path() . config('url.url_story') , $imageName);
+
+            $data = [
+                'user_id' => Auth::user()->id,
+                'content' => $request->content,
+                'url_image_story' => $imageName,
+            ];
+            $this->storyRepo->create($data);
+            toastr()->success(trans('timelime.post_story_success'));
+
+            return redirect()->back();
+        }
+        toastr()->error(trans('timeline.post_story_failed'));
+
+        return redirect()->back();
     }
 }
