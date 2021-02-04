@@ -9,8 +9,9 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    @toastr_css
+    
     <!-- Styles -->
+    {{ Html::script('messages.js') }}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
@@ -29,7 +30,9 @@
     <script src="{{ asset('bower_components/font-awesome/js/fontawesome.min.js') }}"></script>
     <script src="{{ asset('bower_components/font-awesome/js/all.js') }}"></script>
     <script src="{{ asset('js/comment.js') }}"></script>
+    <script src="{{ asset('bower_components/pusher-js/dist/web/pusher.min.js') }}"></script>
     @yield('css')
+    @toastr_css
 </head>
 <body>
     <div id="app">
