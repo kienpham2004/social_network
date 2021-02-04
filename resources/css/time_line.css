@@ -135,8 +135,8 @@
 
 .icon {
     font-size: 13px !important;
-    width: 1.6em !important;
-    height: 1.6em !important;
+    width: 1.7em !important;
+    height: 1.7em !important;
 }
 
 .avatar-img {
@@ -272,15 +272,14 @@
     text-decoration: none;
 }
 
-.notication-span {
-    position: relative;
-}
-
 .span-count-noti {
     position: absolute;
     right: -5px;
     bottom: 15px;
     color: black;
+    color:white; 
+    background-color: red; 
+    font-size: 8px;
 }
 
 .notication-span {
@@ -299,6 +298,9 @@
     z-index: 1;
 }
 
+#option-user {
+    width: auto !important;
+}
 .notication-span:hover .dropdown-content {
     display: block;
 }

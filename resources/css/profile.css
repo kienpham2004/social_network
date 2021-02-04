@@ -473,7 +473,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
 }
 
 .btn-status{
-    background-color: gray;
+    background-color: white;
     padding: 5px;
     width: 100%;
     border: 1px solid gray !important;
