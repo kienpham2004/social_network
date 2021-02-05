@@ -10,4 +10,6 @@ return [
     'count_comment_2' => 2,
     'check_followed' => 1,
     'count_notification' => 0,
+    'start_record_notification' => 0,
+    'end_record_notification' => 10,
 ];

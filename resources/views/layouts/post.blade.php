@@ -82,31 +82,7 @@
                                     </svg>
                                 </button>
                             </li>
-                            <li class="list-inline-item ml-2">
-                                <button class="btn p-0">
-                                    <svg class="icon" viewBox="0 0 16 16"
-                                        class="fas fa-share-alt" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M11.724 3.947l-7 3.5-.448-.894 7-3.5.448.894zm-.448 9l-7-3.5.448-.894 7 3.5-.448.894z" />
-                                        <path fill-rule="evenodd"
-                                            d="M13.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm-11-6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-                                    </svg>
-                                </button>
-                            </li>
                         </ul>
-                        <div>
-                            <button class="btn p-0">
-                                <svg class="icon" viewBox="0 0 16 16" class="bi bi-hdd"
-                                    fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M14 9H2a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1zM2 8a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2H2z" />
-                                    <path
-                                        d="M5 10.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-2 0a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
-                                    <path fill-rule="evenodd"
-                                        d="M4.094 4a.5.5 0 0 0-.44.26l-2.47 4.532A1.5 1.5 0 0 0 1 9.51v.99H0v-.99c0-.418.105-.83.305-1.197l2.472-4.531A1.5 1.5 0 0 1 4.094 3h7.812a1.5 1.5 0 0 1 1.317.782l2.472 4.53c.2.368.305.78.305 1.198v.99h-1v-.99a1.5 1.5 0 0 0-.183-.718L12.345 4.26a.5.5 0 0 0-.439-.26H4.094z" />
-                                </svg>
-                            </button>
-                        </div>
                     </div>
                     <div class="pl-3 pr-3 pb-2">
                         <strong class="d-block"><span class="count-like{{ $post->id }}">{{ $post->users_count }} </span>

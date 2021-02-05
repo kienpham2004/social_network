@@ -12,7 +12,6 @@
     <div class="mt-4">
         <div class="d-flex flex-row justify-content-between">
             <p class="text-suggess">{{ trans('timeline.suggestion') }}</p>
-            <p class="text-suggess">{{ trans('timeline.see_all') }}</p>
         </div>
         <div>
             @foreach ($suggessForYou->slice(config('check_var_on_view.start_fisrt_record_0'), config('check_var_on_view.last_record_3')) as $item)

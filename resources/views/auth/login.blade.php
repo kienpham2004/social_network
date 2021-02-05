@@ -39,10 +39,6 @@
                         <div class="line"></div>
                     </div>
                     <div class="dif">
-                        <div class="fb">
-                            <img src="{{ asset(config('img.img_facebook')) }}" alt="facebook">
-                            <p>{{ trans('log_res.log_with_fb') }}</p>
-                        </div>
                         <div class="forgot">
                             <a href="{{ route('forgot.password') }}">{{ trans('log_res.forgot_pass') }}</a>
                         </div>
@@ -58,13 +54,6 @@
                         </li>
                     @endif
                 </p>
-            </div>
-            <div class="apps">
-                <p>{{ trans('log_res.get_app') }}</p>
-                <div class="icons">
-                    <a href="#"><img src="{{ asset(config('img.img_appstore')) }}" alt="appstore"></a>
-                    <a href="#"><img src="{{ asset(config('img.img_googleplay')) }}" alt="googleplay"></a>
-                </div>
             </div>
         </div>
         <div class="footer">
