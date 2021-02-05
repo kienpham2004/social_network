@@ -147,7 +147,7 @@
 }
 
 .item-comment {
-    padding-bottom: 15px !important; 
+    padding-bottom: 18px !important; 
     padding-top: 5px !important;
     margin-top: 7px;
 }
@@ -161,7 +161,7 @@
 }
 
 .formEditComment {
-    display: none !important;
+    display: none;
 }
 
 .actionEditPost {
@@ -180,14 +180,16 @@
     background-color:#4285f8; 
     border-radius: 2px; 
     border: 1px solid white; 
-    padding: 4px; 
-    margin-top: 2px;  
+    padding: 1px; 
+    margin-top: 1px;  
     color: white;
+    height: 29px;
+    width: 44px;
 }
 
 .button-unlike {
     font-size: 16px !important; 
-    color: #ed4956 !important;
+    color: #ed4956 ;
 }
 
 .button-like {
@@ -325,4 +327,12 @@
     background-color: cornflowerblue;
     color: white;
     float: right;
+}
+
+.color-status-default {
+    color: gray;
+}
+
+.color-status-default:hover {
+    color: gray;
 }

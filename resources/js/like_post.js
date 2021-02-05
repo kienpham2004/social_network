@@ -15,7 +15,7 @@ $(document).on('click', '.button-like' , function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
         },
         success : function(result){
-            html = `<button class="btn p-0 button-unlike" data-user-id="${ result.id_user_noti }" data-token="{{ csrf_token() }}" id="unlike${ result.post_id }" data-id="${ result.post_id }">
+            html = `<button class="btn p-0 button-unlike" data-count="${ parseInt(countLike) }" data-user-id="${ result.id_user_noti }" data-token="{{ csrf_token() }}" id="unlike${ result.post_id }" data-id="${ result.post_id }">
                         <svg class="icon" viewBox="0 0 16 16"
                             class="fas fa-heart" fill="currentColor">
                             <path fill-rule="evenodd"
@@ -24,7 +24,7 @@ $(document).on('click', '.button-like' , function(){
                     </button>`;
 
             $("#like" + idPost).replaceWith(html);
-            $(".count-like" + idPost).text(countLike + 1);
+            $(".count-like" + idPost).text(parseInt(countLike) + 1);
         },
         error : function(result){
             alert("Not Working!");
@@ -44,12 +44,13 @@ $(document).on('click', '.button-unlike' , function(){
             'id' : idPost,
             '_token' : token,
             'user_id' : user_id,
+            'count_like' : countLike,
         },
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
         },
         success : function(result){
-            html = `<button class="btn p-0 button-like" data-user-id="${ result.id_user_noti }" data-token="{{ csrf_token() }}" id="like${result.post_id}" data-id="${result.post_id}">
+            html = `<button class="btn p-0 button-like" data-count="${ parseInt(countLike) }" data-user-id="${ result.id_user_noti }" data-token="{{ csrf_token() }}" id="like${result.post_id}" data-id="${result.post_id}">
                         <svg class="icon" viewBox="0 0 16 16"
                             class="far fa-heart icon-like" fill="currentColor">
                             <path fill-rule="evenodd"
@@ -57,7 +58,7 @@ $(document).on('click', '.button-unlike' , function(){
                         </svg>
                     </button>`;
             $("#unlike" + idPost).replaceWith(html);
-            $(".count-like" + idPost).text(countLike - 1);
+            $(".count-like" + idPost).text(parseInt(countLike));
         },
         error : function(result){
             alert("Not Working!");

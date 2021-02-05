@@ -85,9 +85,9 @@ class CommentController extends Controller
             $data = [
                 'content' => $request->valueEditComment,
             ];
-            $this->commentRepo->update($id, $data);
+            $commentEdited = $this->commentRepo->update($id, $data);
                   
-            return view('layouts.edit_comment', compact('comment'));
+            return view('layouts.edit_comment', compact('commentEdited'));
         }
     }
 }

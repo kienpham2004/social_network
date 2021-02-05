@@ -94,23 +94,22 @@
                         </strong>
                         <p><strong>{{ $post->user->username }}</strong>   {{ $post->caption }}</p>
                         <hr>
-                        @if ($post->comments_count > config('check_var_on_view.count_comment_2'))
-                            <button class="btn p-0 view_comment{{ $post->id }}">
-                                <span class="text-muted view_comment" id="view_comment{{ $post->id }}" data-post-id="{{$post->id }}">{{ trans('timeline.view') }} {{ $post->comments_count - 2 }} {{ trans('timeline.comments') }}</span>
-                            </button>
-                        @endif
                         @include('layouts.comment')
                     </div>
                     <div class="position-relative comment-box">
                         <input type="text" class="form-control w-100 p-3 add_comment input-post{{ $post->id }}" 
                             id="commentValue{{ $post->id }}" placeholder="{{ trans('timeline.add_comment') }}" 
                             value="" data-id={{ $post->id }} name="comment" autofocus  >
-                        <button class="btn btn-primary position-absolute btn-ig send-comment-on-post send-comment{{ $post->id }}" 
-                            type="submit" data-post-id="{{ $post->id }}" disabled>{{ trans('timeline.post') }}</button>
+                        <button class="btn color-status-default position-absolute btn-ig send-comment-on-post send-comment{{ $post->id }}" 
+                            type="submit" data-post-id="{{ $post->id }}" >{{ trans('timeline.post') }}</button>
                     </div>
                 </div>
             </div>
         </div>
     @endforeach
-    <button type="button" class="btn btn-primary btn-loadmore" value="{{ $post->id }}" >{{ trans('timeline.load_more') }}</button>
+    @foreach ($posts as $post)
+        @if ($loop->last)
+            <button type="button" class="btn btn-primary btn-loadmore" value="{{ $post->id }}">{{ trans('timeline.load_more') }}</button>
+        @endif
+    @endforeach
 </div>

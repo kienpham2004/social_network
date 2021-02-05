@@ -1,6 +1,6 @@
 @foreach ($posts as $post)
     <div id="listComment{{ $post->id }}">
-        @foreach ($post->comments->slice(config('check_var_on_view.start_fisrt_record_2'), $post->comment_counts) as $item)
+        @foreach ($post->comments->slice(config('check_var_on_view.start_fisrt_record_0'), config('check_var_on_view.start_fisrt_record_2')) as $item)
             <div class="item-comment item-comment{{ $item->id }}" >
                 <div class="comment-avt show_comment{{ $item->id }}" data-id="{{ $item->id }}" >
                     <div
@@ -13,7 +13,7 @@
                             @if ($item->user->username != Auth::user()->username)
                                 {{ route('wall.your_friend', $item->user->username) }}
                             @else
-                                {{ route('home.profile') }}
+                                {{ route('profile.index') }}
                             @endif">{{ $item->user->username }}
                         </a>
                     </strong>
@@ -37,5 +37,8 @@
                 </div>
             </div>
         @endforeach
+        <button class="btn p-0 view_comment{{ $post->id }}">
+            <span class="text-muted view_comment" id="view_comment{{ $post->id }}" data-paginate="{{ $item->id }}" data-count-comment="{{ $post->comments_count - config('check_var_on_view.count_comment_2') }}" data-post-id="{{ $post->id }}">{{ trans('timeline.view') }} {{ trans('timeline.comments') }}</span>
+        </button>
     </div>
 @endforeach

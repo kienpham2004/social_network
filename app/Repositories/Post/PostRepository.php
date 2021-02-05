@@ -42,7 +42,9 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
     public function getPostLimit($user)
     {
-        return Post::with("user", "images", "comments")
+        return Post::with(["user", "images", "comments" => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])
             ->whereIn('user_id', $user)
             ->withCount('users', 'comments')
             ->orderBy('created_at', 'desc')
@@ -64,5 +66,12 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     public function findPostWithUser($id)
     {
         return Post::with('user')->findOrFail($id);
+    }
+
+    public function getCommentLoadMore($id, $commentId)
+    {
+        return Post::with(['user', 'images', 'comments' => function ($query) use ($commentId) { 
+            $query->where('id', '<', $commentId)->limit(config('var_in_controller.limit_record'))->orderBy('created_at', 'desc'); 
+        }])->where('id', $id)->withCount('users', 'comments')->orderBy('created_at', 'desc')->get();
     }
 }

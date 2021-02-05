@@ -24,6 +24,7 @@ $(document).on('click', '.btn-loadmore', function(){
 
 $(document).on('click', '.view_comment', function(){
     let id = $(this).data('post-id');
+    let commentId = $(this).data('paginate');
     let token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
         url : '/home/view-comment',
@@ -31,6 +32,7 @@ $(document).on('click', '.view_comment', function(){
         data : {
             '_token' : token,
             'id' : id,
+            'id_comment' : commentId,
         },
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

@@ -18,4 +18,6 @@ interface PostRepositoryInterface extends RepositoryInterface
    public function getPostLoadMore($user, $id);
 
    public function findPostWithUser($id);
+
+   public function getCommentLoadMore($id, $id_comment);
 }
