@@ -29,7 +29,7 @@ class SendOtpMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('OTP Confirm forgot password:')
+        return $this->subject(trans('mail.subject_mail'))
             ->markdown('email.send_code_otp');
     }
 }

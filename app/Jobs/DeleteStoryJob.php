@@ -8,12 +8,15 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
+use App\Models\Story;
 use Illuminate\Support\Carbon;
+use App\Repositories\Story\StoryRepositoryInterface;
 
 class DeleteStoryJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    protected $storyRepo;
     /**
      * Create a new job instance.
      *
@@ -29,10 +32,8 @@ class DeleteStoryJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(StoryRepositoryInterface $storyRepo)
     {
-        DB::table('stories')
-            ->where('created_at', '<=', Carbon::now()->subMinute())
-            ->delete();
+        $storyRepo->deleteStory();
     }
 }
