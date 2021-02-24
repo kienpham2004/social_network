@@ -87,10 +87,15 @@ $(document).on("click", ".submitEditComment", function(){
 
 $(document).on('keyup', '.add_comment', function(){
     let id = $(this).data('id');
-    $('.send-comment').prop('disabled', true);
-    if ($(this).val() != '') {
+    $('.send-comment-on-post').prop('disabled', true);
+    if ($('.send-comment-on-post').prop('disabled', true)) {
+        $('.send-comment' + id).css('color', 'gray');
+    }
+    if ($('.input-post' + id).val() != '') {
         $('.send-comment' + id).prop('disabled', false);
+        $('.send-comment' + id).css('color', '#0095f6');
     } else {
         $('.send-comment' + id).prop('disabled', true);
+        $('.send-comment' + id).css('color', 'gray');
     }
 })

@@ -66,9 +66,10 @@ class HomeControllerTest extends TestCase
     public function test_viewcomment_method()
     {
         $id = 2;
+        $commentId = 1; 
         $request = new Request();
         $this->profileMock->shouldReceive('getIdFollowingPluckId')->andReturn(true);
-        $this->postMock->shouldReceive('getPostLoadMore')->with('djasnd', $request->id)->andReturn(true);
+        $this->postMock->shouldReceive('getCommentLoadMore')->with($request->id, $request->commentId)->andReturn(true);
         $this->likeMock->shouldReceive('selectLikePostId')->andReturn(true);
         $this->likeMock->shouldReceive('convertArrLike')->with('jhabshd')->andReturn(true);
         $result = $this->homeController->viewComment($request);

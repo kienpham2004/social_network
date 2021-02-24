@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c9f9c213d136a224e5c3c34b442d6345",
+    "content-hash": "0ec716a99b6feac7b37adf03b85cc17a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1654,28 +1654,28 @@
         },
         {
             "name": "mariuzzo/laravel-js-localization",
-            "version": "v1.7.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rmariuzzo/Laravel-JS-Localization.git",
-                "reference": "9e92f50134e8decb57c4530725b5d08b61002242"
+                "reference": "8f05fe59dcc02e61b1c33750a12cade8de4c38c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmariuzzo/Laravel-JS-Localization/zipball/9e92f50134e8decb57c4530725b5d08b61002242",
-                "reference": "9e92f50134e8decb57c4530725b5d08b61002242",
+                "url": "https://api.github.com/repos/rmariuzzo/Laravel-JS-Localization/zipball/8f05fe59dcc02e61b1c33750a12cade8de4c38c8",
+                "reference": "8f05fe59dcc02e61b1c33750a12cade8de4c38c8",
                 "shasum": ""
             },
             "require": {
-                "illuminate/config": "^4.2 || ^5.0 || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/console": "^4.2 || ^5.0 || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/filesystem": "^4.2 || ^5.0 || ^6.0 || ^7.0 || ^8.0",
-                "php": "^5.4 || ^7.0",
-                "tedivm/jshrink": "~1.0"
+                "illuminate/config": ">=4.2",
+                "illuminate/console": ">=4.2",
+                "illuminate/filesystem": ">=4.2",
+                "php": ">=5.4.0",
+                "tedivm/jshrink": "~1.0",
+                "vlucas/phpdotenv": "^3.3|^4.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^2.2 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
-                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0"
+                "phpunit/phpunit": "4.8.*"
             },
             "type": "library",
             "extra": {
@@ -1721,11 +1721,6 @@
                     "name": "Anton Komarev",
                     "homepage": "https://github.com/antonkomarev",
                     "role": "Developer"
-                },
-                {
-                    "name": "Pascal Baljet",
-                    "homepage": "https://github.com/pascalbaljetmedia",
-                    "role": "Developer"
                 }
             ],
             "description": "Laravel Localization in JavaScript",
@@ -1739,7 +1734,7 @@
                 "laravel 5",
                 "localization"
             ],
-            "time": "2020-09-16T23:46:26+00:00"
+            "time": "2020-03-11T17:20:52+00:00"
         },
         {
             "name": "monolog/monolog",

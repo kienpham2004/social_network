@@ -8,6 +8,11 @@ use App\Repositories\Profile\ProfileRepositoryInterface;
 use App\Repositories\Post\PostRepositoryInterface;
 use App\Repositories\Like\LikeRepositoryInterface;
 use App\Repositories\Story\StoryRepositoryInterface;
+use App\Models\Like;
+use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
+use App\Models\Comment;
 
 class HomeController extends Controller
 {
@@ -50,15 +55,16 @@ class HomeController extends Controller
         $posts = $this->postRepo->getPostLoadMore($user, $id);
         $likes = $this->likeRepo->selectLikePostId();
         $likeArr = $this->likeRepo->convertArrLike($likes);
-        
+
         return view('layouts.load-post', compact('posts', 'likeArr'));
     }
 
     public function viewComment(Request $request)
     {
         $id = $request->id;
+        $commentId = $request->id_comment;
         $user = $this->profileRepo->getIdFollowingPluckId();
-        $posts = $this->postRepo->getPostLoadMore($user, $id);
+        $posts = $this->postRepo->getCommentLoadMore($id, $commentId);
         $likes = $this->likeRepo->selectLikePostId();
         $likeArr = $this->likeRepo->convertArrLike($likes);
 
