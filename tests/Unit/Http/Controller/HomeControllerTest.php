@@ -7,6 +7,7 @@ use Mockery;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
+use App\Repositories\Activity\ActivityRepositoryInterface;
 use App\Repositories\Profile\ProfileRepositoryInterface;
 use App\Repositories\Post\PostRepositoryInterface;
 use App\Repositories\Like\LikeRepositoryInterface;
@@ -14,7 +15,7 @@ use App\Repositories\Story\StoryRepositoryInterface;
 
 class HomeControllerTest extends TestCase
 {
-    protected $profileMock, $postMock, $likeMock, $homeController, $storyMock;
+    protected $profileMock, $postMock, $likeMock, $homeController, $activityMock, $storyMock;
 
     public function setUp() : void
     {
@@ -23,7 +24,8 @@ class HomeControllerTest extends TestCase
         $this->postMock = Mockery::mock(PostRepositoryInterface::class)->makePartial();
         $this->likeMock = Mockery::mock(LikeRepositoryInterface::class)->makePartial();
         $this->storyMock = Mockery::mock(StoryRepositoryInterface::class)->makePartial();
-        $this->homeController = new HomeController($this->profileMock, $this->postMock, $this->likeMock, $this->storyMock);
+        $this->activityMock = Mockery::mock(ActivityRepositoryInterface::class)->makePartial();
+        $this->homeController = new HomeController($this->profileMock, $this->postMock, $this->likeMock, $this->storyMock, $this->activityMock);
     }
 
     public function tearDown() : void
@@ -41,12 +43,14 @@ class HomeControllerTest extends TestCase
         $this->likeMock->shouldReceive('selectLikePostId')->andReturn(true);
         $this->likeMock->shouldReceive('convertArrLike')->with('jhabshd')->andReturn(true);
         $this->storyMock->shouldReceive('getListStory')->andReturn(true);
+        $this->activityMock->shouldReceive('getActivity')->andReturn(true);
         $result = $this->homeController->index();
         $this->assertEquals('time_line', $result->getName());
         $this->assertArrayHasKey('posts', $result->getData());
         $this->assertArrayHasKey('suggessForYou', $result->getData());
         $this->assertArrayHasKey('likeArr', $result->getData());
         $this->assertArrayHasKey('stories', $result->getData());
+        $this->assertArrayHasKey('listHistory', $result->getData());
     }
 
     public function test_loadpost_method()
@@ -77,4 +81,5 @@ class HomeControllerTest extends TestCase
         $this->assertArrayHasKey('posts', $result->getData());
         $this->assertArrayHasKey('likeArr', $result->getData());
     }
+    
 }

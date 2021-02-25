@@ -33,4 +33,16 @@ class FollowRepository extends BaseRepository implements FollowRepositoryInterfa
         
         return $idFollow;
     }
+
+    public function getFollower($id)
+    {
+        return Follow::with('friend')->where('follow_id', $id)->first();
+    }
+
+    public function getUserRelationFriend($id)
+    {
+        $user = Follow::with('friend')->where('follow_id', $id)->first();
+
+        return $user->friend->username;
+    }
 }

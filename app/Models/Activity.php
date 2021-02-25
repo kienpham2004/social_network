@@ -11,6 +11,7 @@ class Activity extends Model
         'action',
         'actable_type',
         'user_id',
+        'notify',
     ];
 
     public function actable()

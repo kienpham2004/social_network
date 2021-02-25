@@ -15,24 +15,27 @@ use App\Repositories\Like\LikeRepositoryInterface;
 use App\Repositories\Profile\ProfileRepositoryInterface;
 use App\Repositories\Post\PostRepositoryInterface;
 use App\Models\User;
+use App\Repositories\Activity\ActivityRepositoryInterface;
 use App\Repositories\Story\StoryRepositoryInterface;
 
 class ProfileController extends Controller
 {
-    protected $profileRepo, $postRepo, $likeRepo, $followRepo, $storyRepo;
+    protected $profileRepo, $postRepo, $likeRepo, $followRepo, $storyRepo, $activityRepo;
 
     public function __construct(
         ProfileRepositoryInterface $profileRepo, 
         PostRepositoryInterface $postRepo,
         LikeRepositoryInterface $likeRepo,
         FollowRepositoryInterface $followRepo,
-        StoryRepositoryInterface $storyRepo
+        StoryRepositoryInterface $storyRepo,
+        ActivityRepositoryInterface $activityRepo
     ) {
         $this->profileRepo = $profileRepo;
         $this->postRepo = $postRepo;
         $this->likeRepo = $likeRepo;
         $this->followRepo = $followRepo;
         $this->storyRepo = $storyRepo;
+        $this->activityRepo = $activityRepo;
     }
 
     public function index()
@@ -43,8 +46,9 @@ class ProfileController extends Controller
         $users = $this->profileRepo->getFollowerAndFollowing();
         $following = $users->following;
         $followers = $users->follower;
-
-        return view('profile', compact('posts', 'counts', 'following', 'followers'));
+        $listHistory = $this->activityRepo->getActivity();
+      
+        return view('profile', compact('posts', 'counts', 'following', 'followers', 'listHistory'));
     }
 
     public function postStatus(PostStatusRequest $request)
@@ -121,8 +125,9 @@ class ProfileController extends Controller
                     $checkFollow = $this->followRepo->checkFollow($item->user_id, $idUser);
                     $posts = $this->postRepo->getPostLatest($idUser);
                     $counts = $this->profileRepo->loadFollowerAndCountFollower($idUser);
+                    $listHistory = $this->activityRepo->getActivity();
                         
-                    return view('profile', compact('posts', 'counts', 'users', 'following', 'followers', 'checkFollow'));
+                    return view('profile', compact('posts', 'counts', 'users', 'following', 'followers', 'checkFollow', 'listHistory'));
                 } else {
                     $users = $this->profileRepo->getFollowerAndFollowing();
                     $following = $users->following;
@@ -131,10 +136,11 @@ class ProfileController extends Controller
                     $checkFollow = $this->followRepo->checkFollow($item->user_id, $idUser);
                     $posts = $this->postRepo->getPostWithUserImageCommentLatest('user_id', $user[0]->id);
                     $counts =  $this->profileRepo->loadFollowerAndCountFollower($idUser);
+                    $listHistory = $this->activityRepo->getActivity();
 
-                    return view('view_user', compact('posts', 'counts', 'users', 'following', 'followers', 'checkFollow'));
+                    return view('view_user', compact('posts', 'counts', 'users', 'following', 'followers', 'checkFollow', 'listHistory'));
+                }
             }
-        }
         }
     }
 
