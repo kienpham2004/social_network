@@ -63,7 +63,7 @@
                                     </button>
                                 @else
                                     <button class="btn p-0 button-like" data-count="{{ $post->users_count }}" data-token="{{ csrf_token() }}" 
-                                            id="like{{ $post->id }}" data-id="{{ $post->id }}">
+                                            id="like{{ $post->id }}" data-id="{{ $post->id }}" data-user-id="{{ $post->user->id }}">
                                         <svg class="icon" viewBox="0 0 16 16"
                                             class="far fa-heart icon-like" fill="currentColor">
                                             <path fill-rule="evenodd"
